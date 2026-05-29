@@ -1,10 +1,277 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Chetan's First Website</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>recykal.market Design Guidelines</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-primary: #00875A;
+            --green-dark: #006644;
+            --green-light: #E3F5EE;
+            --green-subtle: #F0F9F5;
+            
+            --blue-primary: #0066CC;
+            --blue-dark: #004C99;
+            --blue-light: #E5F1FF;
+            
+            --teal-primary: #00C7BE;
+            --teal-light: #E5F9F8;
+            
+            --gray-50: #FAFAFA;
+            --gray-100: #F5F5F5;
+            --gray-200: #EEEEEE;
+            --gray-300: #E0E0E0;
+            --gray-600: #757575;
+            --gray-700: #616161;
+            --gray-900: #1D1D1F;
+            
+            --font-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            
+            --space-4: 16px;
+            --space-6: 24px;
+            --space-8: 32px;
+            --space-12: 48px;
+            --space-16: 64px;
+            --space-20: 80px;
+            
+            --max-width: 1280px;
+            
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.05);
+            --radius-lg: 14px;
+            --radius-xl: 18px;
+            
+            --transition-swift: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-display);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            color: var(--gray-900);
+            background: #FFFFFF;
+        }
+        
+        .header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 0.5px solid rgba(0, 0, 0, 0.08);
+            z-index: 1000;
+            height: 52px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-content {
+            max-width: var(--max-width);
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: var(--gray-900);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo-mark {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, var(--green-primary) 0%, var(--teal-primary) 100%);
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            font-size: 14px;
+        }
+        
+        .header-nav {
+            display: flex;
+            gap: var(--space-8);
+            align-items: center;
+        }
+        
+        .header-nav a {
+            color: var(--gray-700);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s var(--transition-swift);
+        }
+        
+        .header-nav a:hover,
+        .header-nav a.active {
+            color: var(--green-primary);
+        }
+        
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--space-20) var(--space-6);
+        }
+        
+        .hero {
+            text-align: center;
+            margin-bottom: var(--space-20);
+            padding: var(--space-16) 0;
+        }
+        
+        .eyebrow {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--green-primary);
+            margin-bottom: 12px;
+        }
+        
+        h1 {
+            font-size: 64px;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            line-height: 1.05;
+            color: var(--gray-900);
+            margin-bottom: 24px;
+        }
+        
+        .lead {
+            font-size: 21px;
+            line-height: 1.52;
+            color: var(--gray-600);
+            max-width: 800px;
+            margin: 0 auto 48px;
+        }
+        
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-6);
+            margin-top: var(--space-12);
+        }
+        
+        .section-card {
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-xl);
+            padding: var(--space-12);
+            transition: all 0.3s var(--transition-swift);
+            text-decoration: none;
+            display: block;
+        }
+        
+        .section-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--green-primary);
+        }
+        
+        .section-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--green-light) 0%, var(--teal-light) 100%);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: var(--space-6);
+        }
+        
+        .section-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 12px;
+            letter-spacing: -0.015em;
+        }
+        
+        .section-desc {
+            font-size: 17px;
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 968px) {
+            h1 {
+                font-size: 44px;
+            }
+            
+            .section-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Hello World 🚀</h1>
-  <p>I built this on GitHub!</p>
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                <div class="logo-mark">R</div>
+                <span>recykal.market</span>
+            </a>
+            <nav class="header-nav">
+                <a href="foundations.html">Foundations</a>
+                <a href="components.html">Components</a>
+                <a href="patterns.html">Patterns</a>
+                <a href="design-comparison.html">Compare</a>
+                <a href="resources.html">Resources</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="hero">
+            <div class="eyebrow">Design Guidelines</div>
+            <h1>Build with clarity<br>and purpose</h1>
+            <p class="lead">A comprehensive design system for India's leading B2B circular economy marketplace—where material transparency meets business efficiency.</p>
+        </div>
+
+        <div class="section-grid">
+            <a href="foundations.html" class="section-card">
+                <div class="section-icon">◐</div>
+                <div class="section-title">Foundations</div>
+                <div class="section-desc">Core design principles, color systems, typography, layout, and visual language that define the recykal.market brand.</div>
+            </a>
+
+            <a href="components.html" class="section-card">
+                <div class="section-icon">⬡</div>
+                <div class="section-title">Components</div>
+                <div class="section-desc">Reusable interface elements—buttons, badges, cards, forms, and tables—built for consistency and scale.</div>
+            </a>
+
+            <a href="patterns.html" class="section-card">
+                <div class="section-icon">◈</div>
+                <div class="section-title">Patterns</div>
+                <div class="section-desc">Common user flows and interactions—from listing materials to completing transactions—designed for efficiency and trust.</div>
+            </a>
+
+            <a href="design-comparison.html">Compare</a>
+                <a href="resources.html" class="section-card">
+                <div class="section-icon">◎</div>
+                <div class="section-title">Resources</div>
+                <div class="section-desc">Implementation code, design assets, content guidelines, and tools to bring the design system to life.</div>
+            </a>
+        </div>
+    </div>
 </body>
 </html>
