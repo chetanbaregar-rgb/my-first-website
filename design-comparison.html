@@ -1,0 +1,1885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Philosophy Comparison - recykal.market</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --green-primary: #00875A;
+            --green-subtle: #E3F5EE;
+            --gray-50: #FAFAFA;
+            --gray-100: #F5F5F5;
+            --gray-300: #E0E0E0;
+            --gray-500: #9E9E9E;
+            --gray-600: #757575;
+            --gray-700: #616161;
+            --gray-900: #1D1D1F;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+            background: #E8E8ED;
+            transition: background 0.3s ease;
+            line-height: 1.6;
+        }
+        
+        body.dark-mode {
+            background: #0A0A0A;
+        }
+        
+        /* Header */
+        .header {
+            background: white;
+            border-bottom: 0.5px solid rgba(0, 0, 0, 0.08);
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-mode .header {
+            background: #1C1C1E;
+            border-bottom-color: rgba(255,255,255,0.1);
+        }
+        
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--green-primary);
+            text-decoration: none;
+        }
+        
+        .nav {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+        
+        .nav a {
+            color: var(--gray-700);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        body.dark-mode .nav a {
+            color: #A1A1A6;
+        }
+        
+        .nav a:hover {
+            color: var(--green-primary);
+        }
+        
+        .nav a.active {
+            color: var(--green-primary);
+            font-weight: 600;
+        }
+        
+        /* Layout */
+        .layout {
+            display: flex;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            padding: 24px 0;
+            position: sticky;
+            top: 52px;
+            height: calc(100vh - 52px);
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--gray-300) transparent;
+            border-right: 0.5px solid rgba(0, 0, 0, 0.08);
+            background: white;
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-mode .sidebar {
+            background: #1C1C1E;
+            border-right-color: rgba(255,255,255,0.1);
+        }
+        
+        .accordion-section {
+            margin-bottom: 2px;
+        }
+        
+        .accordion-header {
+            padding: 6px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-900);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.15s ease;
+            user-select: none;
+        }
+        
+        body.dark-mode .accordion-header {
+            color: #FFFFFF;
+        }
+        
+        .accordion-header:hover {
+            background: var(--gray-50);
+        }
+        
+        body.dark-mode .accordion-header:hover {
+            background: rgba(255,255,255,0.05);
+        }
+        
+        .accordion-chevron {
+            font-size: 11px;
+            color: var(--gray-600);
+            transition: transform 0.2s ease;
+            font-weight: 400;
+        }
+        
+        .accordion-section.open .accordion-chevron {
+            transform: rotate(90deg);
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.25s ease;
+        }
+        
+        .accordion-section.open .accordion-content {
+            max-height: 1200px;
+        }
+        
+        .accordion-subsection {
+            margin: 2px 0;
+        }
+        
+        .accordion-subheader {
+            padding: 5px 20px 5px 36px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--gray-700);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.15s ease;
+            user-select: none;
+        }
+        
+        body.dark-mode .accordion-subheader {
+            color: #A1A1A6;
+        }
+        
+        .accordion-subheader:hover {
+            background: var(--gray-50);
+        }
+        
+        body.dark-mode .accordion-subheader:hover {
+            background: rgba(255,255,255,0.04);
+        }
+        
+        .accordion-subcontent {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease;
+        }
+        
+        .accordion-subsection.open .accordion-subcontent {
+            max-height: 800px;
+        }
+        
+        .accordion-subsection.open .accordion-chevron {
+            transform: rotate(90deg);
+        }
+        
+        .accordion-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 20px 5px 52px;
+            font-size: 13px;
+            color: var(--gray-700);
+            text-decoration: none;
+            transition: background 0.15s ease;
+        }
+        
+        body.dark-mode .accordion-link {
+            color: #A1A1A6;
+        }
+        
+        .accordion-link:hover {
+            background: var(--gray-50);
+        }
+        
+        body.dark-mode .accordion-link:hover {
+            background: rgba(255,255,255,0.04);
+        }
+        
+        .accordion-link.active {
+            font-weight: 600;
+            color: var(--green-primary);
+            background: var(--green-subtle);
+        }
+        
+        body.dark-mode .accordion-link.active {
+            background: rgba(0,135,90,0.2);
+        }
+        
+        .accordion-link-top {
+            padding-left: 36px;
+        }
+        
+        /* Main Content */
+        .content {
+            flex: 1;
+            padding: 40px;
+            overflow-x: auto;
+        }
+        
+        .header-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-size: 32px;
+            color: var(--gray-900);
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode h1 {
+            color: #FFFFFF;
+        }
+        
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .toggle-label {
+            font-size: 14px;
+            color: var(--gray-600);
+            font-weight: 500;
+        }
+        
+        body.dark-mode .toggle-label {
+            color: #A1A1A6;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 51px;
+            height: 31px;
+            background: #E5E5EA;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .toggle-switch::before {
+            content: '';
+            position: absolute;
+            width: 27px;
+            height: 27px;
+            border-radius: 50%;
+            background: white;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        body.dark-mode .toggle-switch {
+            background: #34C759;
+        }
+        
+        body.dark-mode .toggle-switch::before {
+            transform: translateX(20px);
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 32px;
+            margin-bottom: 60px;
+        }
+        
+        .phone-frame {
+            background: #000;
+            border-radius: 36px;
+            padding: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        
+        .phone-screen {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            height: 740px;
+            overflow-y: auto;
+        }
+        
+        .phone-screen::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        .phone-screen::-webkit-scrollbar-thumb {
+            background: rgba(0,0,0,0.2);
+            border-radius: 2px;
+        }
+        
+        .design-label {
+            text-align: center;
+            margin-bottom: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--gray-900);
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .design-label {
+            color: #FFFFFF;
+        }
+        
+        .design-subtitle {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: var(--gray-600);
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .design-subtitle {
+            color: #A1A1A6;
+        }
+        /* Apple Style */
+        .apple-screen {
+            background: #F2F2F7;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+            transition: background 0.3s ease;
+        }
+        
+        body.dark-mode .apple-screen {
+            background: #000000;
+        }
+        
+        .apple-header {
+            padding: 24px 24px 16px;
+        }
+        
+        .apple-title {
+            font-size: 34px;
+            font-weight: 700;
+            letter-spacing: -0.015em;
+            color: #000;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .apple-title {
+            color: #FFFFFF;
+        }
+        
+        .apple-stats {
+            padding: 0 16px 24px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        
+        .apple-stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        body.dark-mode .apple-stat-card {
+            background: #1C1C1E;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        .apple-stat-label {
+            font-size: 13px;
+            color: #8E8E93;
+            margin-bottom: 6px;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .apple-stat-label {
+            color: #98989D;
+        }
+        
+        .apple-stat-value {
+            font-size: 36px;
+            font-weight: 600;
+            color: #000;
+            letter-spacing: -0.02em;
+            line-height: 1;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .apple-stat-value {
+            color: #FFFFFF;
+        }
+        
+        .apple-btn {
+            margin: 0 16px 24px;
+            width: calc(100% - 32px);
+            background: #007AFF;
+            color: white;
+            border: none;
+            border-radius: 14px;
+            padding: 18px;
+            font-size: 17px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,122,255,0.3);
+        }
+        
+        .apple-listing {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 0 16px 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        body.dark-mode .apple-listing {
+            background: #1C1C1E;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        .apple-listing-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .apple-listing-title {
+            color: #FFFFFF;
+        }
+        
+        .apple-listing-desc {
+            font-size: 15px;
+            color: #8E8E93;
+            margin-bottom: 16px;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .apple-listing-desc {
+            color: #98989D;
+        }
+        
+        .apple-metrics {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 16px;
+        }
+        
+        .apple-metric-label {
+            font-size: 13px;
+            color: #8E8E93;
+            margin-bottom: 4px;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .apple-metric-label {
+            color: #98989D;
+        }
+        
+        .apple-metric-value {
+            font-size: 17px;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .apple-metric-value {
+            color: #FFFFFF;
+        }
+        
+        /* Material Design */
+        .material-screen {
+            background: #FAFAFA;
+            font-family: Roboto, sans-serif;
+            transition: background 0.3s ease;
+        }
+        
+        body.dark-mode .material-screen {
+            background: #121212;
+        }
+        
+        .material-appbar {
+            background: #00875A;
+            color: white;
+            padding: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        body.dark-mode .material-appbar {
+            background: #1F1F1F;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .material-title {
+            font-size: 24px;
+            font-weight: 500;
+            letter-spacing: 0.015em;
+        }
+        
+        .material-stats {
+            padding: 16px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .material-stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        body.dark-mode .material-stat-card {
+            background: #1F1F1F;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.4);
+        }
+        
+        .material-stat-label {
+            font-size: 12px;
+            color: rgba(0,0,0,0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .material-stat-label {
+            color: rgba(255,255,255,0.6);
+        }
+        
+        .material-stat-value {
+            font-size: 32px;
+            font-weight: 500;
+            color: rgba(0,0,0,0.87);
+            line-height: 1;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .material-stat-value {
+            color: rgba(255,255,255,0.87);
+        }
+        
+        .material-fab {
+            position: fixed;
+            bottom: 90px;
+            right: 32px;
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: #00875A;
+            box-shadow: 0 6px 10px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+        
+        .material-listing {
+            background: white;
+            border-radius: 12px;
+            margin: 0 16px 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            overflow: hidden;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        body.dark-mode .material-listing {
+            background: #1F1F1F;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.4);
+        }
+        
+        .material-listing-content {
+            padding: 16px;
+        }
+        
+        .material-badge {
+            display: inline-block;
+            background: #E8F5E9;
+            color: #2E7D32;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-right: 8px;
+            margin-bottom: 12px;
+        }
+        
+        body.dark-mode .material-badge {
+            background: rgba(46,125,50,0.2);
+            color: #81C784;
+        }
+        
+        .material-listing-title {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .material-listing-title {
+            color: rgba(255,255,255,0.87);
+        }
+        
+        /* Fluent Design */
+        .fluent-screen {
+            background: #F3F3F3;
+            font-family: 'Segoe UI', sans-serif;
+            transition: background 0.3s ease;
+        }
+        
+        body.dark-mode .fluent-screen {
+            background: #1F1F1F;
+        }
+        
+        .fluent-header {
+            background: linear-gradient(135deg, #0078D4 0%, #00BCF2 100%);
+            padding: 20px;
+            color: white;
+        }
+        
+        body.dark-mode .fluent-header {
+            background: linear-gradient(135deg, #005A9E 0%, #0086C3 100%);
+        }
+        
+        .fluent-title {
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+        
+        .fluent-stats {
+            padding: 16px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .fluent-stat-card {
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(30px);
+            border-radius: 8px;
+            padding: 16px;
+            border: 1px solid rgba(255,255,255,0.8);
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-mode .fluent-stat-card {
+            background: rgba(45,45,45,0.8);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .fluent-stat-label {
+            font-size: 12px;
+            color: #605E5C;
+            margin-bottom: 8px;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .fluent-stat-label {
+            color: #B3B0AD;
+        }
+        
+        .fluent-stat-value {
+            font-size: 32px;
+            font-weight: 600;
+            color: #323130;
+            line-height: 1;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .fluent-stat-value {
+            color: #FFFFFF;
+        }
+        
+        .fluent-btn {
+            margin: 0 16px 20px;
+            width: calc(100% - 32px);
+            background: #0078D4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 2px 6px rgba(0,120,212,0.3);
+        }
+        
+        .fluent-listing {
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(30px);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 0 16px 12px;
+            border: 1px solid rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-mode .fluent-listing {
+            background: rgba(45,45,45,0.8);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .fluent-listing-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #323130;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .fluent-listing-title {
+            color: #FFFFFF;
+        }
+        
+        /* Recykal Original */
+        .recykal-screen {
+            background: #FAFAFA;
+            font-family: -apple-system, "Inter", sans-serif;
+            transition: background 0.3s ease;
+        }
+        
+        body.dark-mode .recykal-screen {
+            background: #121212;
+        }
+        
+        .recykal-header {
+            background: white;
+            padding: 20px 24px;
+            border-bottom: 0.5px solid rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-mode .recykal-header {
+            background: #1C1C1E;
+            border-bottom: 0.5px solid rgba(255,255,255,0.1);
+        }
+        
+        .recykal-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1D1D1F;
+            letter-spacing: -0.02em;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .recykal-title {
+            color: #FFFFFF;
+        }
+        
+        .recykal-stats {
+            padding: 24px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .recykal-stat-card {
+            background: white;
+            border-radius: 14px;
+            border: 1px solid #EEEEEE;
+            padding: 20px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-mode .recykal-stat-card {
+            background: #1C1C1E;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        .recykal-stat-label {
+            font-size: 13px;
+            color: #757575;
+            margin-bottom: 8px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .recykal-stat-label {
+            color: #A1A1A6;
+        }
+        
+        .recykal-stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1D1D1F;
+            letter-spacing: -0.02em;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .recykal-stat-value {
+            color: #FFFFFF;
+        }
+        
+        .recykal-btn {
+            margin: 0 24px 24px;
+            width: calc(100% - 48px);
+            background: #00875A;
+            color: white;
+            border: none;
+            border-radius: 14px;
+            padding: 16px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        
+        .recykal-listing {
+            background: white;
+            border-radius: 14px;
+            border: 1px solid #EEEEEE;
+            padding: 16px;
+            margin: 0 24px 12px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-mode .recykal-listing {
+            background: #1C1C1E;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        .recykal-badge {
+            display: inline-block;
+            background: #E3F5EE;
+            color: #006644;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 12px;
+        }
+        
+        body.dark-mode .recykal-badge {
+            background: rgba(0,135,90,0.2);
+            color: #5DD39E;
+        }
+        
+        .recykal-listing-title {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .recykal-listing-title {
+            color: #FFFFFF;
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <div class="container">
+        <div class="header-section">
+            <h1>Design Philosophy Comparison: Seller Home Screen</h1>
+            <div class="dark-mode-toggle">
+                <span class="toggle-label">Light Mode</span>
+                <div class="toggle-switch" id="darkModeToggle"></div>
+            </div>
+        </div>
+        
+        <div class="comparison-grid">
+            <!-- Apple iOS -->
+            <div>
+                <div class="design-label">Apple iOS</div>
+                <div class="design-subtitle">Minimal • Spacious • Refined</div>
+                <div class="phone-frame">
+                    <div class="phone-screen apple-screen">
+                        <div class="apple-header">
+                            <div class="apple-title">Dashboard</div>
+                        </div>
+                        
+                        <div class="apple-stats">
+                            <div class="apple-stat-card">
+                                <div class="apple-stat-label">Active</div>
+                                <div class="apple-stat-value">12</div>
+                            </div>
+                            <div class="apple-stat-card">
+                                <div class="apple-stat-label">Pending</div>
+                                <div class="apple-stat-value" style="color: #FF9F0A;">5</div>
+                            </div>
+                            <div class="apple-stat-card">
+                                <div class="apple-stat-label">This month</div>
+                                <div class="apple-stat-value">₹4.2L</div>
+                            </div>
+                            <div class="apple-stat-card">
+                                <div class="apple-stat-label">Rating</div>
+                                <div class="apple-stat-value">4.8</div>
+                            </div>
+                        </div>
+                        
+                        <button class="apple-btn">List Material</button>
+                        
+                        <div style="padding: 0 24px 16px; font-size: 22px; font-weight: 700; color: #000;">Listings</div>
+                        
+                        <div class="apple-listing">
+                            <div class="apple-listing-title">PET Bottles</div>
+                            <div class="apple-listing-desc">Clear, baled, verified collection</div>
+                            <div class="apple-metrics">
+                                <div>
+                                    <div class="apple-metric-label">Quantity</div>
+                                    <div class="apple-metric-value">5,000 kg</div>
+                                </div>
+                                <div>
+                                    <div class="apple-metric-label">Price</div>
+                                    <div class="apple-metric-value">₹48/kg</div>
+                                </div>
+                            </div>
+                            <div style="padding-top: 16px; border-top: 0.5px solid rgba(0,0,0,0.06); display: flex; justify-content: space-between; font-size: 15px;">
+                                <span style="color: #8E8E93;">Mumbai</span>
+                                <span style="color: #34C759; font-weight: 600;">Available</span>
+                            </div>
+                        </div>
+                        
+                        <div class="apple-listing">
+                            <div class="apple-listing-title">HDPE Mixed</div>
+                            <div class="apple-listing-desc">Industrial-grade, sorted</div>
+                            <div class="apple-metrics">
+                                <div>
+                                    <div class="apple-metric-label">Quantity</div>
+                                    <div class="apple-metric-value">2,500 kg</div>
+                                </div>
+                                <div>
+                                    <div class="apple-metric-label">Price</div>
+                                    <div class="apple-metric-value">₹42/kg</div>
+                                </div>
+                            </div>
+                            <div style="padding-top: 16px; border-top: 0.5px solid rgba(0,0,0,0.06); display: flex; justify-content: space-between; font-size: 15px;">
+                                <span style="color: #8E8E93;">Pune</span>
+                                <span style="color: #FF9F0A; font-weight: 600;">Low stock</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Material Design -->
+            <div>
+                <div class="design-label">Material Design</div>
+                <div class="design-subtitle">Tactile • Colorful • Structured</div>
+                <div class="phone-frame">
+                    <div class="phone-screen material-screen">
+                        <div class="material-appbar">
+                            <div class="material-title">Dashboard</div>
+                        </div>
+                        
+                        <div class="material-stats">
+                            <div class="material-stat-card">
+                                <div class="material-stat-label">Active Listings</div>
+                                <div class="material-stat-value">12</div>
+                                <div style="margin-top: 8px; font-size: 12px; color: #00875A; font-weight: 500;">↑ 2 this week</div>
+                            </div>
+                            <div class="material-stat-card">
+                                <div class="material-stat-label">Inquiries</div>
+                                <div class="material-stat-value">5</div>
+                                <div style="margin-top: 8px; font-size: 12px; color: #FF9800; font-weight: 500;">Needs attention</div>
+                            </div>
+                            <div class="material-stat-card">
+                                <div class="material-stat-label">Revenue</div>
+                                <div class="material-stat-value">₹4.2L</div>
+                                <div style="margin-top: 8px; font-size: 12px; color: #00875A; font-weight: 500;">+18% vs last month</div>
+                            </div>
+                            <div class="material-stat-card">
+                                <div class="material-stat-label">Rating</div>
+                                <div class="material-stat-value">4.8</div>
+                                <div style="margin-top: 8px; font-size: 12px; color: rgba(0,0,0,0.6); font-weight: 500;">142 reviews</div>
+                            </div>
+                        </div>
+                        
+                        <div style="padding: 8px 16px 16px; font-size: 20px; font-weight: 500; color: rgba(0,0,0,0.87);">Recent listings</div>
+                        
+                        <div class="material-listing">
+                            <div class="material-listing-content">
+                                <span class="material-badge">Verified</span>
+                                <span class="material-badge" style="background: #E0F7FA; color: #00796B;">Circular</span>
+                                <div class="material-listing-title">PET Bottles (Clear)</div>
+                                <div style="font-size: 14px; color: rgba(0,0,0,0.6); margin-bottom: 16px;">High-quality baled bottles from verified collection centers</div>
+                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.08);">
+                                    <div>
+                                        <div style="font-size: 11px; color: rgba(0,0,0,0.6); text-transform: uppercase; margin-bottom: 4px;">Quantity</div>
+                                        <div style="font-size: 16px; font-weight: 500;">5,000 kg</div>
+                                    </div>
+                                    <div>
+                                        <div style="font-size: 11px; color: rgba(0,0,0,0.6); text-transform: uppercase; margin-bottom: 4px;">Price</div>
+                                        <div style="font-size: 16px; font-weight: 500;">₹48/kg</div>
+                                    </div>
+                                    <div>
+                                        <div style="font-size: 11px; color: rgba(0,0,0,0.6); text-transform: uppercase; margin-bottom: 4px;">Location</div>
+                                        <div style="font-size: 16px; font-weight: 500;">Mumbai</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="background: #F5F5F5; padding: 12px 16px; display: flex; justify-content: space-between;">
+                                <span style="font-size: 13px; color: rgba(0,0,0,0.6);">Posted 2 hours ago</span>
+                                <span style="color: #00875A; font-size: 14px; font-weight: 500; text-transform: uppercase;">Edit</span>
+                            </div>
+                        </div>
+                        
+                        <div class="material-listing" style="margin-bottom: 80px;">
+                            <div class="material-listing-content">
+                                <span class="material-badge">Verified</span>
+                                <div class="material-listing-title">HDPE Mixed Plastic</div>
+                                <div style="font-size: 14px; color: rgba(0,0,0,0.6); margin-bottom: 16px;">Industrial-grade sorted HDPE</div>
+                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.08);">
+                                    <div>
+                                        <div style="font-size: 11px; color: rgba(0,0,0,0.6); text-transform: uppercase; margin-bottom: 4px;">Quantity</div>
+                                        <div style="font-size: 16px; font-weight: 500;">2,500 kg</div>
+                                    </div>
+                                    <div>
+                                        <div style="font-size: 11px; color: rgba(0,0,0,0.6); text-transform: uppercase; margin-bottom: 4px;">Price</div>
+                                        <div style="font-size: 16px; font-weight: 500;">₹42/kg</div>
+                                    </div>
+                                    <div>
+                                        <div style="font-size: 11px; color: rgba(0,0,0,0.6); text-transform: uppercase; margin-bottom: 4px;">Location</div>
+                                        <div style="font-size: 16px; font-weight: 500;">Pune</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="background: #FFF3E0; padding: 12px 16px; display: flex; justify-content: space-between;">
+                                <span style="font-size: 13px; color: #E65100; font-weight: 500;">Low stock alert</span>
+                                <span style="color: #E65100; font-size: 14px; font-weight: 500; text-transform: uppercase;">Restock</span>
+                            </div>
+                        </div>
+                        
+                        <div class="material-fab">+</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Fluent Design -->
+            <div>
+                <div class="design-label">Fluent Design</div>
+                <div class="design-subtitle">Acrylic • Depth • Light</div>
+                <div class="phone-frame">
+                    <div class="phone-screen fluent-screen">
+                        <div class="fluent-header">
+                            <div class="fluent-title">Dashboard</div>
+                        </div>
+                        
+                        <div class="fluent-stats">
+                            <div class="fluent-stat-card">
+                                <div class="fluent-stat-label">ACTIVE LISTINGS</div>
+                                <div class="fluent-stat-value">12</div>
+                            </div>
+                            <div class="fluent-stat-card">
+                                <div class="fluent-stat-label">PENDING</div>
+                                <div class="fluent-stat-value" style="color: #0078D4;">5</div>
+                            </div>
+                            <div class="fluent-stat-card">
+                                <div class="fluent-stat-label">REVENUE</div>
+                                <div class="fluent-stat-value">₹4.2L</div>
+                            </div>
+                            <div class="fluent-stat-card">
+                                <div class="fluent-stat-label">RATING</div>
+                                <div class="fluent-stat-value">4.8★</div>
+                            </div>
+                        </div>
+                        
+                        <button class="fluent-btn">List New Material</button>
+                        
+                        <div style="padding: 0 16px 12px; font-size: 20px; font-weight: 600; color: #323130;">Recent Listings</div>
+                        
+                        <div class="fluent-listing">
+                            <div style="display: inline-block; background: rgba(0,120,212,0.1); color: #0078D4; padding: 4px 12px; border-radius: 4px; font-size: 11px; font-weight: 600; margin-bottom: 12px;">VERIFIED</div>
+                            <div class="fluent-listing-title">PET Bottles (Clear)</div>
+                            <div style="font-size: 14px; color: #605E5C; margin-bottom: 16px;">High-quality baled bottles from verified centers</div>
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+                                <div>
+                                    <div style="font-size: 12px; color: #605E5C; margin-bottom: 4px; font-weight: 600;">Quantity</div>
+                                    <div style="font-size: 18px; font-weight: 600; color: #323130;">5,000 kg</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 12px; color: #605E5C; margin-bottom: 4px; font-weight: 600;">Price</div>
+                                    <div style="font-size: 18px; font-weight: 600; color: #323130;">₹48/kg</div>
+                                </div>
+                            </div>
+                            <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.08); display: flex; justify-content: space-between; font-size: 14px;">
+                                <span style="color: #605E5C;">Mumbai, MH</span>
+                                <span style="color: #107C10; font-weight: 600;">Available</span>
+                            </div>
+                        </div>
+                        
+                        <div class="fluent-listing">
+                            <div style="display: inline-block; background: rgba(0,120,212,0.1); color: #0078D4; padding: 4px 12px; border-radius: 4px; font-size: 11px; font-weight: 600; margin-bottom: 12px;">VERIFIED</div>
+                            <div class="fluent-listing-title">HDPE Mixed Plastic</div>
+                            <div style="font-size: 14px; color: #605E5C; margin-bottom: 16px;">Industrial-grade sorted HDPE with certifications</div>
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+                                <div>
+                                    <div style="font-size: 12px; color: #605E5C; margin-bottom: 4px; font-weight: 600;">Quantity</div>
+                                    <div style="font-size: 18px; font-weight: 600; color: #323130;">2,500 kg</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 12px; color: #605E5C; margin-bottom: 4px; font-weight: 600;">Price</div>
+                                    <div style="font-size: 18px; font-weight: 600; color: #323130;">₹42/kg</div>
+                                </div>
+                            </div>
+                            <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.08); display: flex; justify-content: space-between; font-size: 14px;">
+                                <span style="color: #605E5C;">Pune, MH</span>
+                                <span style="color: #FF8C00; font-weight: 600;">Low Stock</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recykal Original -->
+            <div>
+                <div class="design-label">Recykal Original</div>
+                <div class="design-subtitle">Professional • Trustworthy • Data-focused</div>
+                <div class="phone-frame">
+                    <div class="phone-screen recykal-screen">
+                        <div class="recykal-header">
+                            <div class="recykal-title">Dashboard</div>
+                            <div style="font-size: 15px; color: #757575; margin-top: 4px;">Good morning, Chetan</div>
+                        </div>
+                        
+                        <div class="recykal-stats">
+                            <div class="recykal-stat-card">
+                                <div class="recykal-stat-label">Active Listings</div>
+                                <div class="recykal-stat-value">12</div>
+                            </div>
+                            <div class="recykal-stat-card">
+                                <div class="recykal-stat-label">Pending Inquiries</div>
+                                <div class="recykal-stat-value" style="color: #FF9500;">5</div>
+                            </div>
+                            <div class="recykal-stat-card">
+                                <div class="recykal-stat-label">This Month</div>
+                                <div class="recykal-stat-value">₹4.2L</div>
+                            </div>
+                            <div class="recykal-stat-card">
+                                <div class="recykal-stat-label">Rating</div>
+                                <div class="recykal-stat-value">4.8★</div>
+                            </div>
+                        </div>
+                        
+                        <button class="recykal-btn">+ List New Material</button>
+                        
+                        <div style="padding: 0 24px 16px; font-size: 17px; font-weight: 600; color: #1D1D1F;">Recent listings</div>
+                        
+                        <div class="recykal-listing">
+                            <span class="recykal-badge">✓ Verified</span>
+                            <span class="recykal-badge" style="background: #E5F9F8; color: #008780;">100% Circular</span>
+                            <div class="recykal-listing-title">PET Bottles (Clear)</div>
+                            <div style="font-size: 14px; color: #616161; margin-bottom: 16px;">High-quality baled bottles from verified collection centers</div>
+                            <div style="background: #FAFAFA; border-radius: 10px; padding: 16px; margin-bottom: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                                <div>
+                                    <div style="font-size: 12px; color: #757575; margin-bottom: 4px;">Quantity</div>
+                                    <div style="font-family: 'SF Mono', monospace; font-size: 15px; font-weight: 600;">5,000 kg</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 12px; color: #757575; margin-bottom: 4px;">Price</div>
+                                    <div style="font-family: 'SF Mono', monospace; font-size: 15px; font-weight: 600;">₹48/kg</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; font-size: 13px;">
+                                <span style="color: #757575;">📍 Mumbai, MH</span>
+                                <span style="color: #00875A; font-weight: 600;">● Available</span>
+                            </div>
+                        </div>
+                        
+                        <div class="recykal-listing">
+                            <span class="recykal-badge">✓ Verified</span>
+                            <div class="recykal-listing-title">HDPE Mixed Plastic</div>
+                            <div style="font-size: 14px; color: #616161; margin-bottom: 16px;">Industrial-grade sorted HDPE with certifications</div>
+                            <div style="background: #FAFAFA; border-radius: 10px; padding: 16px; margin-bottom: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                                <div>
+                                    <div style="font-size: 12px; color: #757575; margin-bottom: 4px;">Quantity</div>
+                                    <div style="font-family: 'SF Mono', monospace; font-size: 15px; font-weight: 600;">2,500 kg</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 12px; color: #757575; margin-bottom: 4px;">Price</div>
+                                    <div style="font-family: 'SF Mono', monospace; font-size: 15px; font-weight: 600;">₹42/kg</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; font-size: 13px;">
+                                <span style="color: #757575;">📍 Pune, MH</span>
+                                <span style="color: #FF9500; font-weight: 600;">● Low Stock</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Dark mode toggle functionality
+        const toggle = document.getElementById('darkModeToggle');
+        const toggleLabel = document.querySelector('.toggle-label');
+        const body = document.body;
+        
+        // Default to dark mode, but check for saved preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            body.classList.remove('dark-mode');
+            toggleLabel.textContent = 'Dark Mode';
+        } else {
+            // Default to dark mode
+            body.classList.add('dark-mode');
+            toggleLabel.textContent = 'Light Mode';
+            localStorage.setItem('theme', 'dark');
+        }
+        
+        // Toggle dark mode
+        toggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            // Update label and save preference
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                toggleLabel.textContent = 'Light Mode';
+            } else {
+                localStorage.setItem('theme', 'light');
+                toggleLabel.textContent = 'Dark Mode';
+            }
+        });
+    </script>
+</body>
+</html><style>
+/* Additional dark mode color fixes */
+body.dark-mode .apple-listing .apple-metric-value {
+    color: #FFFFFF;
+}
+
+body.dark-mode .material-listing .material-listing-desc,
+body.dark-mode .material-listing .material-stat-label,
+body.dark-mode .material-listing div[style*="color: rgba(0,0,0,0.6)"] {
+    color: rgba(255,255,255,0.6) !important;
+}
+
+body.dark-mode .material-listing div[style*="color: rgba(0,0,0,0.87)"] {
+    color: rgba(255,255,255,0.87) !important;
+}
+
+body.dark-mode .fluent-listing div[style*="color: #605E5C"] {
+    color: #B3B0AD !important;
+}
+
+body.dark-mode .fluent-listing div[style*="color: #323130"] {
+    color: #FFFFFF !important;
+}
+
+body.dark-mode .recykal-listing div[style*="color: #616161"] {
+    color: #A1A1A6 !important;
+}
+
+body.dark-mode .recykal-listing div[style*="color: #757575"] {
+    color: #A1A1A6 !important;
+}
+
+body.dark-mode .recykal-listing div[style*="color: #1D1D1F"] {
+    color: #FFFFFF !important;
+}
+
+body.dark-mode .recykal-header div[style*="color: #757575"] {
+    color: #A1A1A6 !important;
+}
+
+body.dark-mode .apple-listing div[style*="color: #000"] {
+    color: #FFFFFF !important;
+}
+
+body.dark-mode .fluent-listing div[style*="color: #107C10"] {
+    color: #6CCB5F !important;
+}
+
+body.dark-mode .material-listing div[style*="color: #00875A"] {
+    color: #5DD39E !important;
+}
+
+body.dark-mode .material-listing div[style*="color: #E65100"] {
+    color: #FF9800 !important;
+}
+
+body.dark-mode .material-listing div[style*="background: #F5F5F5"] {
+    background: #2C2C2E !important;
+}
+
+body.dark-mode .material-listing div[style*="background: #FFF3E0"] {
+    background: rgba(255,152,0,0.2) !important;
+}
+
+body.dark-mode .recykal-listing div[style*="background: #FAFAFA"] {
+    background: #2C2C2E !important;
+}
+
+body.dark-mode .apple-listing div[style*="border-top: 0.5px solid rgba(0,0,0,0.06)"] {
+    border-top-color: rgba(255,255,255,0.1) !important;
+}
+
+body.dark-mode .material-listing div[style*="border-top: 1px solid rgba(0,0,0,0.08)"] {
+    border-top-color: rgba(255,255,255,0.1) !important;
+}
+
+body.dark-mode .recykal-listing div[style*="border-radius: 10px"] {
+    background: #2C2C2E !important;
+}
+</style>
+    </style>
+</head>
+<body class="dark-mode">
+    <!-- Header -->
+    <div class="header">
+        <a href="index.html" class="logo">recykal.market</a>
+        <nav class="nav">
+            <a href="foundations.html">Foundations</a>
+            <a href="components.html">Components</a>
+            <a href="patterns.html">Patterns</a>
+            <a href="resources.html">Content</a>
+            <a href="design-comparison.html" class="active">Compare</a>
+        </nav>
+    </div>
+    
+    <div class="layout">
+        <aside class="sidebar">
+            <!-- Foundations Section -->
+            <div class="accordion-section open">
+                <div class="accordion-header">
+                    <span class="accordion-chevron">›</span>
+                    <span>Foundations</span>
+                </div>
+                <div class="accordion-content">
+                    <a href="foundations.html#philosophy" class="accordion-link accordion-link-top">Design Philosophy</a>
+                    <a href="foundations.html#principles" class="accordion-link accordion-link-top">Principles</a>
+                    <a href="foundations.html#color" class="accordion-link accordion-link-top">Color</a>
+                    <a href="foundations.html#typography" class="accordion-link accordion-link-top">Typography</a>
+                    <a href="foundations.html#layout" class="accordion-link accordion-link-top">Layout & Spacing</a>
+                    <a href="foundations.html#motion" class="accordion-link accordion-link-top">Motion</a>
+                    <a href="foundations.html#imagery" class="accordion-link accordion-link-top">Imagery</a>
+                    <a href="foundations.html#iconography" class="accordion-link accordion-link-top">Iconography</a>
+                </div>
+            </div>
+            
+            <!-- Components Section -->
+            <div class="accordion-section">
+                <div class="accordion-header">
+                    <span class="accordion-chevron">›</span>
+                    <span>Components</span>
+                </div>
+                <div class="accordion-content">
+                    <!-- Interactive Elements Subsection -->
+                    <div class="accordion-subsection">
+                        <div class="accordion-subheader">
+                            <span class="accordion-chevron">›</span>
+                            <span>Interactive elements</span>
+                        </div>
+                        <div class="accordion-subcontent">
+                            <a href="components.html#buttons" class="accordion-link">Buttons</a>
+                            <a href="components.html#badges" class="accordion-link">Badges & Labels</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Data Display Subsection -->
+                    <div class="accordion-subsection">
+                        <div class="accordion-subheader">
+                            <span class="accordion-chevron">›</span>
+                            <span>Data display</span>
+                        </div>
+                        <div class="accordion-subcontent">
+                            <a href="components.html#cards" class="accordion-link">Cards</a>
+                            <a href="components.html#tables" class="accordion-link">Tables</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Input Subsection -->
+                    <div class="accordion-subsection">
+                        <div class="accordion-subheader">
+                            <span class="accordion-chevron">›</span>
+                            <span>Input</span>
+                        </div>
+                        <div class="accordion-subcontent">
+                            <a href="components.html#forms" class="accordion-link">Forms</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Patterns Section -->
+            <div class="accordion-section">
+                <div class="accordion-header">
+                    <span class="accordion-chevron">›</span>
+                    <span>Patterns</span>
+                </div>
+                <div class="accordion-content">
+                    <!-- Material Flow Subsection -->
+                    <div class="accordion-subsection">
+                        <div class="accordion-subheader">
+                            <span class="accordion-chevron">›</span>
+                            <span>Material flow</span>
+                        </div>
+                        <div class="accordion-subcontent">
+                            <a href="patterns.html#listing" class="accordion-link">Listing Materials</a>
+                            <a href="patterns.html#discovery" class="accordion-link">Material Discovery</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Transactions Subsection -->
+                    <div class="accordion-subsection">
+                        <div class="accordion-subheader">
+                            <span class="accordion-chevron">›</span>
+                            <span>Transactions</span>
+                        </div>
+                        <div class="accordion-subcontent">
+                            <a href="patterns.html#transactions" class="accordion-link">Transaction Flow</a>
+                            <a href="patterns.html#verification" class="accordion-link">Verification</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Communication Subsection -->
+                    <div class="accordion-subsection">
+                        <div class="accordion-subheader">
+                            <span class="accordion-chevron">›</span>
+                            <span>Communication</span>
+                        </div>
+                        <div class="accordion-subcontent">
+                            <a href="patterns.html#messaging" class="accordion-link">Messaging</a>
+                            <a href="patterns.html#dashboards" class="accordion-link">Dashboards</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Content Section -->
+            <div class="accordion-section">
+                <div class="accordion-header">
+                    <span class="accordion-chevron">›</span>
+                    <span>Content</span>
+                </div>
+                <div class="accordion-content">
+                    <a href="resources.html#voice" class="accordion-link accordion-link-top">Voice & Tone</a>
+                    <a href="resources.html#writing" class="accordion-link accordion-link-top">Writing Guidelines</a>
+                    <a href="resources.html#terminology" class="accordion-link accordion-link-top">Terminology</a>
+                </div>
+            </div>
+            
+            <!-- Resources Section -->
+            <div class="accordion-section">
+                <div class="accordion-header">
+                    <span class="accordion-chevron">›</span>
+                    <span>Resources</span>
+                </div>
+                <div class="accordion-content">
+                    <a href="design-comparison.html" class="accordion-link accordion-link-top">Design Comparison</a>
+                </div>
+            </div>
+        </aside>
+
+        <div class="content">
+            <div class="header-section">
+                <h1>Design Philosophy Comparison</h1>
+                <div class="dark-mode-toggle">
+                    <span class="toggle-label">Light Mode</span>
+                    <div class="toggle-switch" id="darkModeToggle"></div>
+                </div>
+            </div>
+        <div class="comparison-grid">
+            <!-- Apple iOS -->
+            <div>
+                <div class="design-label">Apple iOS</div>
+                <div class="design-subtitle">Minimal • Spacious • Refined</div>
+                <div class="phone-frame">
+                    <div class="phone-screen apple-screen">
+                        <div class="apple-header">
+                            <div class="apple-title">Dashboard</div>
+                        </div>
+                        
+                        <div class="apple-stats">
+                            <div class="apple-stat-card">
+                                <div class="apple-stat-label">Active</div>
+                                <div class="apple-stat-value">12</div>
+                            </div>
+                            <div class="apple-stat-card">
+                                <div class="apple-stat-label">Pending</div>
+                                <div class="apple-stat-value" style="color: #FF9F0A;">5</div>
+                            </div>
+                            <div class="apple-stat-card">
+                                <div class="apple-stat-label">This month</div>
+                                <div class="apple-stat-value">₹4.2L</div>
+                            </div>
+                            <div class="apple-stat-card">
+                                <div class="apple-stat-label">Rating</div>
+                                <div class="apple-stat-value">4.8</div>
+                            </div>
+                        </div>
+                        
+                        <button class="apple-btn">List Material</button>
+                        
+                        <div style="padding: 0 24px 16px; font-size: 22px; font-weight: 700; color: #000;">Listings</div>
+                        
+                        <div class="apple-listing">
+                            <div class="apple-listing-title">PET Bottles</div>
+                            <div class="apple-listing-desc">Clear, baled, verified collection</div>
+                            <div class="apple-metrics">
+                                <div>
+                                    <div class="apple-metric-label">Quantity</div>
+                                    <div class="apple-metric-value">5,000 kg</div>
+                                </div>
+                                <div>
+                                    <div class="apple-metric-label">Price</div>
+                                    <div class="apple-metric-value">₹48/kg</div>
+                                </div>
+                            </div>
+                            <div style="padding-top: 16px; border-top: 0.5px solid rgba(0,0,0,0.06); display: flex; justify-content: space-between; font-size: 15px;">
+                                <span style="color: #8E8E93;">Mumbai</span>
+                                <span style="color: #34C759; font-weight: 600;">Available</span>
+                            </div>
+                        </div>
+                        
+                        <div class="apple-listing">
+                            <div class="apple-listing-title">HDPE Mixed</div>
+                            <div class="apple-listing-desc">Industrial-grade, sorted</div>
+                            <div class="apple-metrics">
+                                <div>
+                                    <div class="apple-metric-label">Quantity</div>
+                                    <div class="apple-metric-value">2,500 kg</div>
+                                </div>
+                                <div>
+                                    <div class="apple-metric-label">Price</div>
+                                    <div class="apple-metric-value">₹42/kg</div>
+                                </div>
+                            </div>
+                            <div style="padding-top: 16px; border-top: 0.5px solid rgba(0,0,0,0.06); display: flex; justify-content: space-between; font-size: 15px;">
+                                <span style="color: #8E8E93;">Pune</span>
+                                <span style="color: #FF9F0A; font-weight: 600;">Low stock</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Material Design -->
+            <div>
+                <div class="design-label">Material Design</div>
+                <div class="design-subtitle">Tactile • Colorful • Structured</div>
+                <div class="phone-frame">
+                    <div class="phone-screen material-screen">
+                        <div class="material-appbar">
+                            <div class="material-title">Dashboard</div>
+                        </div>
+                        
+                        <div class="material-stats">
+                            <div class="material-stat-card">
+                                <div class="material-stat-label">Active Listings</div>
+                                <div class="material-stat-value">12</div>
+                                <div style="margin-top: 8px; font-size: 12px; color: #00875A; font-weight: 500;">↑ 2 this week</div>
+                            </div>
+                            <div class="material-stat-card">
+                                <div class="material-stat-label">Inquiries</div>
+                                <div class="material-stat-value">5</div>
+                                <div style="margin-top: 8px; font-size: 12px; color: #FF9800; font-weight: 500;">Needs attention</div>
+                            </div>
+                            <div class="material-stat-card">
+                                <div class="material-stat-label">Revenue</div>
+                                <div class="material-stat-value">₹4.2L</div>
+                                <div style="margin-top: 8px; font-size: 12px; color: #00875A; font-weight: 500;">+18% vs last month</div>
+                            </div>
+                            <div class="material-stat-card">
+                                <div class="material-stat-label">Rating</div>
+                                <div class="material-stat-value">4.8</div>
+                                <div style="margin-top: 8px; font-size: 12px; color: rgba(0,0,0,0.6); font-weight: 500;">142 reviews</div>
+                            </div>
+                        </div>
+                        
+                        <div style="padding: 8px 16px 16px; font-size: 20px; font-weight: 500; color: rgba(0,0,0,0.87);">Recent listings</div>
+                        
+                        <div class="material-listing">
+                            <div class="material-listing-content">
+                                <span class="material-badge">Verified</span>
+                                <span class="material-badge" style="background: #E0F7FA; color: #00796B;">Circular</span>
+                                <div class="material-listing-title">PET Bottles (Clear)</div>
+                                <div style="font-size: 14px; color: rgba(0,0,0,0.6); margin-bottom: 16px;">High-quality baled bottles from verified collection centers</div>
+                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.08);">
+                                    <div>
+                                        <div style="font-size: 11px; color: rgba(0,0,0,0.6); text-transform: uppercase; margin-bottom: 4px;">Quantity</div>
+                                        <div style="font-size: 16px; font-weight: 500;">5,000 kg</div>
+                                    </div>
+                                    <div>
+                                        <div style="font-size: 11px; color: rgba(0,0,0,0.6); text-transform: uppercase; margin-bottom: 4px;">Price</div>
+                                        <div style="font-size: 16px; font-weight: 500;">₹48/kg</div>
+                                    </div>
+                                    <div>
+                                        <div style="font-size: 11px; color: rgba(0,0,0,0.6); text-transform: uppercase; margin-bottom: 4px;">Location</div>
+                                        <div style="font-size: 16px; font-weight: 500;">Mumbai</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="background: #F5F5F5; padding: 12px 16px; display: flex; justify-content: space-between;">
+                                <span style="font-size: 13px; color: rgba(0,0,0,0.6);">Posted 2 hours ago</span>
+                                <span style="color: #00875A; font-size: 14px; font-weight: 500; text-transform: uppercase;">Edit</span>
+                            </div>
+                        </div>
+                        
+                        <div class="material-listing" style="margin-bottom: 80px;">
+                            <div class="material-listing-content">
+                                <span class="material-badge">Verified</span>
+                                <div class="material-listing-title">HDPE Mixed Plastic</div>
+                                <div style="font-size: 14px; color: rgba(0,0,0,0.6); margin-bottom: 16px;">Industrial-grade sorted HDPE</div>
+                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.08);">
+                                    <div>
+                                        <div style="font-size: 11px; color: rgba(0,0,0,0.6); text-transform: uppercase; margin-bottom: 4px;">Quantity</div>
+                                        <div style="font-size: 16px; font-weight: 500;">2,500 kg</div>
+                                    </div>
+                                    <div>
+                                        <div style="font-size: 11px; color: rgba(0,0,0,0.6); text-transform: uppercase; margin-bottom: 4px;">Price</div>
+                                        <div style="font-size: 16px; font-weight: 500;">₹42/kg</div>
+                                    </div>
+                                    <div>
+                                        <div style="font-size: 11px; color: rgba(0,0,0,0.6); text-transform: uppercase; margin-bottom: 4px;">Location</div>
+                                        <div style="font-size: 16px; font-weight: 500;">Pune</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="background: #FFF3E0; padding: 12px 16px; display: flex; justify-content: space-between;">
+                                <span style="font-size: 13px; color: #E65100; font-weight: 500;">Low stock alert</span>
+                                <span style="color: #E65100; font-size: 14px; font-weight: 500; text-transform: uppercase;">Restock</span>
+                            </div>
+                        </div>
+                        
+                        <div class="material-fab">+</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Fluent Design -->
+            <div>
+                <div class="design-label">Fluent Design</div>
+                <div class="design-subtitle">Acrylic • Depth • Light</div>
+                <div class="phone-frame">
+                    <div class="phone-screen fluent-screen">
+                        <div class="fluent-header">
+                            <div class="fluent-title">Dashboard</div>
+                        </div>
+                        
+                        <div class="fluent-stats">
+                            <div class="fluent-stat-card">
+                                <div class="fluent-stat-label">ACTIVE LISTINGS</div>
+                                <div class="fluent-stat-value">12</div>
+                            </div>
+                            <div class="fluent-stat-card">
+                                <div class="fluent-stat-label">PENDING</div>
+                                <div class="fluent-stat-value" style="color: #0078D4;">5</div>
+                            </div>
+                            <div class="fluent-stat-card">
+                                <div class="fluent-stat-label">REVENUE</div>
+                                <div class="fluent-stat-value">₹4.2L</div>
+                            </div>
+                            <div class="fluent-stat-card">
+                                <div class="fluent-stat-label">RATING</div>
+                                <div class="fluent-stat-value">4.8★</div>
+                            </div>
+                        </div>
+                        
+                        <button class="fluent-btn">List New Material</button>
+                        
+                        <div style="padding: 0 16px 12px; font-size: 20px; font-weight: 600; color: #323130;">Recent Listings</div>
+                        
+                        <div class="fluent-listing">
+                            <div style="display: inline-block; background: rgba(0,120,212,0.1); color: #0078D4; padding: 4px 12px; border-radius: 4px; font-size: 11px; font-weight: 600; margin-bottom: 12px;">VERIFIED</div>
+                            <div class="fluent-listing-title">PET Bottles (Clear)</div>
+                            <div style="font-size: 14px; color: #605E5C; margin-bottom: 16px;">High-quality baled bottles from verified centers</div>
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+                                <div>
+                                    <div style="font-size: 12px; color: #605E5C; margin-bottom: 4px; font-weight: 600;">Quantity</div>
+                                    <div style="font-size: 18px; font-weight: 600; color: #323130;">5,000 kg</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 12px; color: #605E5C; margin-bottom: 4px; font-weight: 600;">Price</div>
+                                    <div style="font-size: 18px; font-weight: 600; color: #323130;">₹48/kg</div>
+                                </div>
+                            </div>
+                            <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.08); display: flex; justify-content: space-between; font-size: 14px;">
+                                <span style="color: #605E5C;">Mumbai, MH</span>
+                                <span style="color: #107C10; font-weight: 600;">Available</span>
+                            </div>
+                        </div>
+                        
+                        <div class="fluent-listing">
+                            <div style="display: inline-block; background: rgba(0,120,212,0.1); color: #0078D4; padding: 4px 12px; border-radius: 4px; font-size: 11px; font-weight: 600; margin-bottom: 12px;">VERIFIED</div>
+                            <div class="fluent-listing-title">HDPE Mixed Plastic</div>
+                            <div style="font-size: 14px; color: #605E5C; margin-bottom: 16px;">Industrial-grade sorted HDPE with certifications</div>
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+                                <div>
+                                    <div style="font-size: 12px; color: #605E5C; margin-bottom: 4px; font-weight: 600;">Quantity</div>
+                                    <div style="font-size: 18px; font-weight: 600; color: #323130;">2,500 kg</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 12px; color: #605E5C; margin-bottom: 4px; font-weight: 600;">Price</div>
+                                    <div style="font-size: 18px; font-weight: 600; color: #323130;">₹42/kg</div>
+                                </div>
+                            </div>
+                            <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.08); display: flex; justify-content: space-between; font-size: 14px;">
+                                <span style="color: #605E5C;">Pune, MH</span>
+                                <span style="color: #FF8C00; font-weight: 600;">Low Stock</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recykal Original -->
+            <div>
+                <div class="design-label">Recykal Original</div>
+                <div class="design-subtitle">Professional • Trustworthy • Data-focused</div>
+                <div class="phone-frame">
+                    <div class="phone-screen recykal-screen">
+                        <div class="recykal-header">
+                            <div class="recykal-title">Dashboard</div>
+                            <div style="font-size: 15px; color: #757575; margin-top: 4px;">Good morning, Chetan</div>
+                        </div>
+                        
+                        <div class="recykal-stats">
+                            <div class="recykal-stat-card">
+                                <div class="recykal-stat-label">Active Listings</div>
+                                <div class="recykal-stat-value">12</div>
+                            </div>
+                            <div class="recykal-stat-card">
+                                <div class="recykal-stat-label">Pending Inquiries</div>
+                                <div class="recykal-stat-value" style="color: #FF9500;">5</div>
+                            </div>
+                            <div class="recykal-stat-card">
+                                <div class="recykal-stat-label">This Month</div>
+                                <div class="recykal-stat-value">₹4.2L</div>
+                            </div>
+                            <div class="recykal-stat-card">
+                                <div class="recykal-stat-label">Rating</div>
+                                <div class="recykal-stat-value">4.8★</div>
+                            </div>
+                        </div>
+                        
+                        <button class="recykal-btn">+ List New Material</button>
+                        
+                        <div style="padding: 0 24px 16px; font-size: 17px; font-weight: 600; color: #1D1D1F;">Recent listings</div>
+                        
+                        <div class="recykal-listing">
+                            <span class="recykal-badge">✓ Verified</span>
+                            <span class="recykal-badge" style="background: #E5F9F8; color: #008780;">100% Circular</span>
+                            <div class="recykal-listing-title">PET Bottles (Clear)</div>
+                            <div style="font-size: 14px; color: #616161; margin-bottom: 16px;">High-quality baled bottles from verified collection centers</div>
+                            <div style="background: #FAFAFA; border-radius: 10px; padding: 16px; margin-bottom: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                                <div>
+                                    <div style="font-size: 12px; color: #757575; margin-bottom: 4px;">Quantity</div>
+                                    <div style="font-family: 'SF Mono', monospace; font-size: 15px; font-weight: 600;">5,000 kg</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 12px; color: #757575; margin-bottom: 4px;">Price</div>
+                                    <div style="font-family: 'SF Mono', monospace; font-size: 15px; font-weight: 600;">₹48/kg</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; font-size: 13px;">
+                                <span style="color: #757575;">📍 Mumbai, MH</span>
+                                <span style="color: #00875A; font-weight: 600;">● Available</span>
+                            </div>
+                        </div>
+                        
+                        <div class="recykal-listing">
+                            <span class="recykal-badge">✓ Verified</span>
+                            <div class="recykal-listing-title">HDPE Mixed Plastic</div>
+                            <div style="font-size: 14px; color: #616161; margin-bottom: 16px;">Industrial-grade sorted HDPE with certifications</div>
+                            <div style="background: #FAFAFA; border-radius: 10px; padding: 16px; margin-bottom: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                                <div>
+                                    <div style="font-size: 12px; color: #757575; margin-bottom: 4px;">Quantity</div>
+                                    <div style="font-family: 'SF Mono', monospace; font-size: 15px; font-weight: 600;">2,500 kg</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 12px; color: #757575; margin-bottom: 4px;">Price</div>
+                                    <div style="font-family: 'SF Mono', monospace; font-size: 15px; font-weight: 600;">₹42/kg</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; font-size: 13px;">
+                                <span style="color: #757575;">📍 Pune, MH</span>
+                                <span style="color: #FF9500; font-weight: 600;">● Low Stock</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    </div>
+    
+    <script>
+        // Dark mode toggle functionality
+        const toggle = document.getElementById('darkModeToggle');
+        const toggleLabel = document.querySelector('.toggle-label');
+        const body = document.body;
+        
+        // Default to dark mode, but check for saved preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            body.classList.remove('dark-mode');
+            toggleLabel.textContent = 'Dark Mode';
+        } else {
+            body.classList.add('dark-mode');
+            toggleLabel.textContent = 'Light Mode';
+            localStorage.setItem('theme', 'dark');
+        }
+        
+        // Toggle dark mode
+        toggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                toggleLabel.textContent = 'Light Mode';
+            } else {
+                localStorage.setItem('theme', 'light');
+                toggleLabel.textContent = 'Dark Mode';
+            }
+        });
+        
+        // Accordion functionality
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const section = header.parentElement;
+                section.classList.toggle('open');
+            });
+        });
+        
+        document.querySelectorAll('.accordion-subheader').forEach(subheader => {
+            subheader.addEventListener('click', () => {
+                const subsection = subheader.parentElement;
+                subsection.classList.toggle('open');
+            });
+        });
+    </script>
+</body>
+</html>

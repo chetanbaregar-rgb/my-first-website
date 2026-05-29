@@ -1,0 +1,2402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>recykal.market Design Guidelines</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Brand Colors - Refined Palette */
+            --green-primary: #00875A;
+            --green-dark: #006644;
+            --green-light: #E3F5EE;
+            --green-subtle: #F0F9F5;
+            
+            --blue-primary: #0066CC;
+            --blue-dark: #004C99;
+            --blue-light: #E5F1FF;
+            
+            --amber-primary: #FF9500;
+            --amber-light: #FFF4E5;
+            
+            --teal-primary: #00C7BE;
+            --teal-light: #E5F9F8;
+            
+            /* Neutrals - Premium Gray Scale */
+            --gray-50: #FAFAFA;
+            --gray-100: #F5F5F5;
+            --gray-200: #EEEEEE;
+            --gray-300: #E0E0E0;
+            --gray-400: #BDBDBD;
+            --gray-500: #9E9E9E;
+            --gray-600: #757575;
+            --gray-700: #616161;
+            --gray-800: #424242;
+            --gray-900: #1D1D1F;
+            
+            /* Semantic Colors */
+            --success: #34C759;
+            --warning: #FF9500;
+            --error: #FF3B30;
+            --info: #007AFF;
+            
+            /* Typography */
+            --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            --font-text: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            --font-mono: 'SF Mono', 'Monaco', 'Courier New', monospace;
+            
+            /* Spacing - 8pt Grid */
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-5: 20px;
+            --space-6: 24px;
+            --space-8: 32px;
+            --space-10: 40px;
+            --space-12: 48px;
+            --space-16: 64px;
+            --space-20: 80px;
+            --space-24: 96px;
+            
+            /* Layout */
+            --max-width: 1280px;
+            --content-width: 840px;
+            --sidebar-width: 280px;
+            
+            /* Effects */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+            
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 14px;
+            --radius-xl: 18px;
+            
+            --transition-swift: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-text);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            color: var(--gray-900);
+            line-height: 1.6;
+            background: #FFFFFF;
+            font-size: 17px;
+        }
+        
+        /* Header */
+        .header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 0.5px solid rgba(0, 0, 0, 0.08);
+            z-index: 1000;
+            height: 52px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-content {
+            max-width: var(--max-width);
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: var(--gray-900);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+        
+        .logo-mark {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, var(--green-primary) 0%, var(--teal-primary) 100%);
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            font-size: 14px;
+            letter-spacing: -0.02em;
+        }
+        
+        .header-nav {
+            display: flex;
+            gap: var(--space-8);
+            align-items: center;
+        }
+        
+        .header-nav a {
+            color: var(--gray-700);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s var(--transition-swift);
+            letter-spacing: -0.01em;
+        }
+        
+        .header-nav a:hover {
+            color: var(--green-primary);
+        }
+        
+        /* Layout Container */
+        .layout {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+        }
+        
+        /* Apple-style Accordion Sidebar */
+        .sidebar {
+            width: 280px;
+            padding: var(--space-6) 0;
+            position: sticky;
+            top: 52px;
+            height: calc(100vh - 52px);
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+            border-right: 0.5px solid rgba(0, 0, 0, 0.08);
+            background: var(--gray-50);
+        }
+        
+        .sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+        }
+        
+        /* Main accordion sections */
+        .accordion-section {
+            margin-bottom: 2px;
+        }
+        
+        .accordion-header {
+            padding: 6px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-900);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.15s ease;
+            user-select: none;
+        }
+        
+        .accordion-header:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        
+        .accordion-chevron {
+            font-size: 11px;
+            color: var(--gray-600);
+            transition: transform 0.2s ease;
+            font-weight: 400;
+        }
+        
+        .accordion-section.open .accordion-chevron {
+            transform: rotate(90deg);
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.25s ease;
+        }
+        
+        .accordion-section.open .accordion-content {
+            max-height: 1200px;
+        }
+        
+        /* Nested sub-sections */
+        .accordion-subsection {
+            margin: 2px 0;
+        }
+        
+        .accordion-subheader {
+            padding: 5px 20px 5px 36px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--gray-800);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.15s ease;
+            user-select: none;
+        }
+        
+        .accordion-subheader:hover {
+            background: rgba(0, 0, 0, 0.04);
+        }
+        
+        .accordion-subcontent {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease;
+        }
+        
+        .accordion-subsection.open .accordion-subcontent {
+            max-height: 800px;
+        }
+        
+        .accordion-subsection.open .accordion-chevron {
+            transform: rotate(90deg);
+        }
+        
+        /* Links */
+        .accordion-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 20px 5px 52px;
+            font-size: 13px;
+            color: var(--gray-700);
+            text-decoration: none;
+            transition: background 0.15s ease;
+        }
+        
+        .accordion-link:hover {
+            background: rgba(0, 0, 0, 0.04);
+        }
+        
+        .accordion-link.active {
+            font-weight: 600;
+            color: var(--gray-900);
+            background: rgba(0, 0, 0, 0.06);
+        }
+        
+        /* Top-level links (no sub-sections) */
+        .accordion-link-top {
+            padding-left: 36px;
+        }
+
+        /* Main Content */
+        .content {
+            flex: 1;
+            max-width: var(--content-width);
+            padding: var(--space-16) var(--space-10) var(--space-24) var(--space-10);
+        }
+        
+        /* Hero */
+        .hero {
+            margin-bottom: var(--space-20);
+        }
+        
+        .eyebrow {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--green-primary);
+            margin-bottom: var(--space-3);
+            letter-spacing: -0.01em;
+        }
+        
+        h1 {
+            font-family: var(--font-display);
+            font-size: 56px;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            line-height: 1.07;
+            color: var(--gray-900);
+            margin-bottom: var(--space-5);
+        }
+        
+        .lead {
+            font-size: 21px;
+            line-height: 1.52;
+            color: var(--gray-600);
+            letter-spacing: -0.01em;
+            margin-bottom: var(--space-8);
+            font-weight: 400;
+        }
+        
+        /* Typography Hierarchy */
+        h2 {
+            font-family: var(--font-display);
+            font-size: 40px;
+            font-weight: 700;
+            letter-spacing: -0.022em;
+            line-height: 1.15;
+            color: var(--gray-900);
+            margin-top: var(--space-20);
+            margin-bottom: var(--space-6);
+        }
+        
+        h3 {
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: -0.015em;
+            line-height: 1.25;
+            color: var(--gray-900);
+            margin-top: var(--space-12);
+            margin-bottom: var(--space-4);
+        }
+        
+        h4 {
+            font-size: 21px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            line-height: 1.38;
+            color: var(--gray-900);
+            margin-top: var(--space-8);
+            margin-bottom: var(--space-3);
+        }
+        
+        h5 {
+            font-size: 17px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: var(--gray-800);
+            margin-top: var(--space-6);
+            margin-bottom: var(--space-2);
+        }
+        
+        p {
+            font-size: 17px;
+            line-height: 1.65;
+            color: var(--gray-700);
+            margin-bottom: var(--space-5);
+            letter-spacing: -0.01em;
+        }
+        
+        /* Color System */
+        .color-section {
+            margin: var(--space-12) 0;
+        }
+        
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-4);
+            margin: var(--space-8) 0;
+        }
+        
+        .color-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s var(--transition-swift);
+        }
+        
+        .color-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--gray-300);
+        }
+        
+        .color-swatch {
+            height: 140px;
+            width: 100%;
+        }
+        
+        .color-info {
+            padding: var(--space-4);
+        }
+        
+        .color-name {
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--gray-900);
+            margin-bottom: var(--space-1);
+            letter-spacing: -0.01em;
+        }
+        
+        .color-value {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--gray-600);
+            letter-spacing: -0.01em;
+        }
+        
+        .color-usage {
+            font-size: 13px;
+            color: var(--gray-600);
+            margin-top: var(--space-2);
+            line-height: 1.4;
+        }
+        
+        /* Typography Scale */
+        .type-scale {
+            margin: var(--space-10) 0;
+        }
+        
+        .type-example {
+            padding: var(--space-8);
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-4);
+        }
+        
+        .type-label {
+            font-size: 11px;
+            color: var(--gray-500);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: var(--space-3);
+        }
+        
+        .type-specs {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--gray-600);
+            margin-top: var(--space-2);
+            line-height: 1.5;
+        }
+        
+        /* Principle Cards */
+        .principle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--space-6);
+            margin: var(--space-10) 0;
+        }
+        
+        .principle-card {
+            background: white;
+            padding: var(--space-8);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s var(--transition-swift);
+        }
+        
+        .principle-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--green-primary);
+        }
+        
+        .principle-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--green-light) 0%, var(--teal-light) 100%);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: var(--space-4);
+        }
+        
+        .principle-title {
+            font-size: 19px;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: var(--space-2);
+            letter-spacing: -0.01em;
+        }
+        
+        .principle-desc {
+            font-size: 15px;
+            color: var(--gray-600);
+            line-height: 1.55;
+            letter-spacing: -0.01em;
+        }
+        
+        /* Component Showcase */
+        .showcase {
+            background: var(--gray-50);
+            padding: var(--space-12);
+            border-radius: var(--radius-xl);
+            margin: var(--space-10) 0;
+            border: 1px solid var(--gray-200);
+        }
+        
+        .showcase-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: var(--space-2);
+            letter-spacing: -0.01em;
+        }
+        
+        .showcase-desc {
+            font-size: 14px;
+            color: var(--gray-600);
+            margin-bottom: var(--space-6);
+            line-height: 1.5;
+        }
+        
+        /* Buttons */
+        .button-row {
+            display: flex;
+            gap: var(--space-4);
+            flex-wrap: wrap;
+            margin: var(--space-6) 0;
+            align-items: center;
+        }
+        
+        .btn {
+            padding: 11px 22px;
+            border-radius: var(--radius-lg);
+            font-weight: 500;
+            font-size: 15px;
+            letter-spacing: -0.01em;
+            cursor: pointer;
+            transition: all 0.2s var(--transition-swift);
+            border: none;
+            font-family: var(--font-text);
+            white-space: nowrap;
+        }
+        
+        .btn-primary {
+            background: var(--green-primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--green-dark);
+            box-shadow: 0 4px 12px rgba(0, 135, 90, 0.25);
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--green-primary);
+            border: 1.5px solid var(--green-primary);
+            padding: 9.5px 22px;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--green-subtle);
+        }
+        
+        .btn-tertiary {
+            background: var(--gray-100);
+            color: var(--gray-900);
+        }
+        
+        .btn-tertiary:hover {
+            background: var(--gray-200);
+        }
+        
+        .btn-large {
+            padding: 14px 28px;
+            font-size: 17px;
+        }
+        
+        .btn-small {
+            padding: 7px 14px;
+            font-size: 13px;
+        }
+        
+        /* Badges */
+        .badge-row {
+            display: flex;
+            gap: var(--space-3);
+            flex-wrap: wrap;
+            margin: var(--space-6) 0;
+            align-items: center;
+        }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-1);
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+        
+        .badge-verified {
+            background: var(--green-light);
+            color: var(--green-dark);
+        }
+        
+        .badge-premium {
+            background: var(--blue-light);
+            color: var(--blue-dark);
+        }
+        
+        .badge-new {
+            background: var(--amber-light);
+            color: #CC7700;
+        }
+        
+        .badge-certified {
+            background: var(--teal-light);
+            color: #008780;
+        }
+        
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-6);
+            margin: var(--space-8) 0;
+        }
+        
+        .card {
+            background: white;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--gray-200);
+            overflow: hidden;
+            transition: all 0.3s var(--transition-swift);
+        }
+        
+        .card:hover {
+            border-color: var(--gray-300);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+        
+        .card-image {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, var(--gray-100) 0%, var(--gray-200) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+        
+        .card-content {
+            padding: var(--space-5);
+        }
+        
+        .card-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: var(--space-2);
+            letter-spacing: -0.01em;
+        }
+        
+        .card-desc {
+            font-size: 14px;
+            color: var(--gray-600);
+            line-height: 1.5;
+            margin-bottom: var(--space-4);
+        }
+        
+        .card-meta {
+            font-size: 13px;
+            color: var(--gray-500);
+            display: flex;
+            gap: var(--space-3);
+            align-items: center;
+        }
+        
+        /* Data Table */
+        .table-container {
+            margin: var(--space-8) 0;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--gray-200);
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        .data-table thead {
+            background: var(--gray-50);
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .data-table th {
+            padding: var(--space-4);
+            text-align: left;
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+        
+        .data-table td {
+            padding: var(--space-4);
+            border-top: 1px solid var(--gray-100);
+            font-size: 15px;
+            color: var(--gray-700);
+        }
+        
+        .data-table tbody tr:hover {
+            background: var(--gray-50);
+        }
+        
+        /* Do/Don't Examples */
+        .example-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-6);
+            margin: var(--space-10) 0;
+        }
+        
+        .example-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 2px solid var(--gray-200);
+        }
+        
+        .example-card.do {
+            border-color: var(--green-primary);
+        }
+        
+        .example-card.dont {
+            border-color: #D1D1D1;
+        }
+        
+        .example-header {
+            padding: var(--space-3) var(--space-4);
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+        
+        .example-card.do .example-header {
+            background: var(--green-primary);
+            color: white;
+        }
+        
+        .example-card.dont .example-header {
+            background: var(--gray-700);
+            color: white;
+        }
+        
+        .example-body {
+            padding: var(--space-6);
+        }
+        
+        /* Code Block */
+        .code-block {
+            background: var(--gray-900);
+            color: #FAFAFA;
+            padding: var(--space-6);
+            border-radius: var(--radius-lg);
+            font-family: var(--font-mono);
+            font-size: 13px;
+            line-height: 1.7;
+            overflow-x: auto;
+            margin: var(--space-8) 0;
+        }
+        
+        .code-comment {
+            color: #8E8E93;
+        }
+        
+        .code-keyword {
+            color: #FF79C6;
+        }
+        
+        .code-string {
+            color: #50FA7B;
+        }
+        
+        .code-function {
+            color: #8BE9FD;
+        }
+        
+        /* Lists */
+        ul, ol {
+            margin: var(--space-5) 0;
+            padding-left: var(--space-6);
+        }
+        
+        li {
+            margin-bottom: var(--space-3);
+            line-height: 1.65;
+            color: var(--gray-700);
+        }
+        
+        /* Callout */
+        .callout {
+            background: var(--blue-light);
+            border-left: 4px solid var(--blue-primary);
+            padding: var(--space-5) var(--space-6);
+            border-radius: var(--radius-md);
+            margin: var(--space-8) 0;
+        }
+        
+        .callout-title {
+            font-weight: 600;
+            color: var(--blue-dark);
+            margin-bottom: var(--space-2);
+            font-size: 15px;
+        }
+        
+        .callout-body {
+            font-size: 15px;
+            color: var(--gray-700);
+            line-height: 1.6;
+        }
+        
+        /* Grid System */
+        .grid {
+            display: grid;
+            gap: var(--space-6);
+        }
+        
+        .grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
+        .grid-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        
+        /* Spacing Examples */
+        .spacing-demo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+            margin: var(--space-6) 0;
+        }
+        
+        .spacing-box {
+            background: var(--green-light);
+            border: 1px solid var(--green-primary);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--green-dark);
+        }
+        
+        /* Footer */
+        .footer {
+            margin-top: var(--space-24);
+            padding-top: var(--space-12);
+            border-top: 1px solid var(--gray-200);
+        }
+        
+        .footer-text {
+            font-size: 14px;
+            color: var(--gray-500);
+            line-height: 1.6;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .sidebar {
+                display: none;
+            }
+            
+            h1 {
+                font-size: 44px;
+            }
+            
+            h2 {
+                font-size: 32px;
+            }
+            
+            .example-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .grid-2, .grid-3, .grid-4 {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .content {
+                padding: var(--space-10) var(--space-6);
+            }
+            
+            h1 {
+                font-size: 36px;
+            }
+            
+            .button-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                <div class="logo-mark">R</div>
+                <span>recykal.market</span>
+            </a>
+            <nav class="header-nav">
+                <a href="foundations.html">Foundations</a>
+                <a href="components.html">Components</a>
+                <a href="patterns.html">Patterns</a>
+                <a href="design-comparison.html">Compare</a>
+                <a href="resources.html" class="active">Resources</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Layout -->
+    <div class="layout">
+        <aside class="sidebar">
+            <!-- Foundations Section -->
+            <div class="accordion-section open">
+                <div class="accordion-header">
+                    <span class="accordion-chevron">›</span>
+                    <span>Foundations</span>
+                </div>
+                <div class="accordion-content">
+                    <a href="foundations.html#philosophy" class="accordion-link accordion-link-top">Design Philosophy</a>
+                    <a href="foundations.html#principles" class="accordion-link accordion-link-top">Principles</a>
+                    <a href="foundations.html#color" class="accordion-link accordion-link-top">Color</a>
+                    <a href="foundations.html#typography" class="accordion-link accordion-link-top">Typography</a>
+                    <a href="foundations.html#layout" class="accordion-link accordion-link-top">Layout & Spacing</a>
+                    <a href="foundations.html#motion" class="accordion-link accordion-link-top">Motion</a>
+                    <a href="foundations.html#imagery" class="accordion-link accordion-link-top">Imagery</a>
+                    <a href="foundations.html#iconography" class="accordion-link accordion-link-top">Iconography</a>
+                </div>
+            </div>
+            
+            <!-- Components Section -->
+            <div class="accordion-section">
+                <div class="accordion-header">
+                    <span class="accordion-chevron">›</span>
+                    <span>Components</span>
+                </div>
+                <div class="accordion-content">
+                    <!-- Interactive Elements Subsection -->
+                    <div class="accordion-subsection">
+                        <div class="accordion-subheader">
+                            <span class="accordion-chevron">›</span>
+                            <span>Interactive elements</span>
+                        </div>
+                        <div class="accordion-subcontent">
+                            <a href="components.html#buttons" class="accordion-link">Buttons</a>
+                            <a href="components.html#badges" class="accordion-link">Badges & Labels</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Data Display Subsection -->
+                    <div class="accordion-subsection">
+                        <div class="accordion-subheader">
+                            <span class="accordion-chevron">›</span>
+                            <span>Data display</span>
+                        </div>
+                        <div class="accordion-subcontent">
+                            <a href="components.html#cards" class="accordion-link">Cards</a>
+                            <a href="components.html#tables" class="accordion-link">Tables</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Input Subsection -->
+                    <div class="accordion-subsection">
+                        <div class="accordion-subheader">
+                            <span class="accordion-chevron">›</span>
+                            <span>Input</span>
+                        </div>
+                        <div class="accordion-subcontent">
+                            <a href="components.html#forms" class="accordion-link">Forms</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Patterns Section -->
+            <div class="accordion-section">
+                <div class="accordion-header">
+                    <span class="accordion-chevron">›</span>
+                    <span>Patterns</span>
+                </div>
+                <div class="accordion-content">
+                    <!-- Material Flow Subsection -->
+                    <div class="accordion-subsection">
+                        <div class="accordion-subheader">
+                            <span class="accordion-chevron">›</span>
+                            <span>Material flow</span>
+                        </div>
+                        <div class="accordion-subcontent">
+                            <a href="patterns.html#listing" class="accordion-link">Listing Materials</a>
+                            <a href="patterns.html#discovery" class="accordion-link">Material Discovery</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Transactions Subsection -->
+                    <div class="accordion-subsection">
+                        <div class="accordion-subheader">
+                            <span class="accordion-chevron">›</span>
+                            <span>Transactions</span>
+                        </div>
+                        <div class="accordion-subcontent">
+                            <a href="patterns.html#transactions" class="accordion-link">Transaction Flow</a>
+                            <a href="patterns.html#verification" class="accordion-link">Verification</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Communication Subsection -->
+                    <div class="accordion-subsection">
+                        <div class="accordion-subheader">
+                            <span class="accordion-chevron">›</span>
+                            <span>Communication</span>
+                        </div>
+                        <div class="accordion-subcontent">
+                            <a href="patterns.html#messaging" class="accordion-link">Messaging</a>
+                            <a href="patterns.html#dashboards" class="accordion-link">Dashboards</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Content Section -->
+            <div class="accordion-section">
+                <div class="accordion-header">
+                    <span class="accordion-chevron">›</span>
+                    <span>Content</span>
+                </div>
+                <div class="accordion-content">
+                    <a href="resources.html#voice" class="accordion-link accordion-link-top">Voice & Tone</a>
+                    <a href="resources.html#writing" class="accordion-link accordion-link-top">Writing Guidelines</a>
+                    <a href="resources.html#terminology" class="accordion-link accordion-link-top">Terminology</a>
+                </div>
+            </div>
+            
+            <!-- Resources Section -->
+            <div class="accordion-section">
+                <div class="accordion-header">
+                    <span class="accordion-chevron">›</span>
+                    <span>Resources</span>
+                </div>
+                <div class="accordion-content">
+                    <a href="design-comparison.html" class="accordion-link accordion-link-top">Design Comparison</a>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Sidebar Navigation -->
+        
+
+        <!-- Main Content -->
+        <main class="content">
+            <!-- Hero -->
+            <div class="hero">
+                <div class="eyebrow">Design Guidelines</div>
+                <h1>Build with clarity and purpose</h1>
+                <p class="lead">A comprehensive guide to designing experiences for India's leading B2B circular economy marketplace — where material transparency meets business efficiency.</p>
+            </div>
+
+            <!-- Design Philosophy -->
+            <section id="philosophy">
+                <h2>Design Philosophy</h2>
+                <p>recykal.market connects buyers and sellers of secondary materials through a platform built on transparency, trust, and efficiency. Every design decision serves these core values.</p>
+                
+                <div class="principle-grid">
+                    <div class="principle-card">
+                        <div class="principle-icon">◐</div>
+                        <div class="principle-title">Clarity First</div>
+                        <div class="principle-desc">Material specifications, pricing, and availability must be instantly clear. Ambiguity erodes trust in B2B transactions.</div>
+                    </div>
+                    
+                    <div class="principle-card">
+                        <div class="principle-icon">✓</div>
+                        <div class="principle-title">Earned Trust</div>
+                        <div class="principle-desc">Verification badges, transaction history, and quality certifications build confidence. Trust is shown, not claimed.</div>
+                    </div>
+                    
+                    <div class="principle-card">
+                        <div class="principle-icon">⚡</div>
+                        <div class="principle-title">Efficient Workflows</div>
+                        <div class="principle-desc">Time is currency. Streamlined listing creation, intelligent search, and rapid transaction flows respect our users' expertise.</div>
+                    </div>
+                    
+                    <div class="principle-card">
+                        <div class="principle-icon">↻</div>
+                        <div class="principle-title">Circular Impact</div>
+                        <div class="principle-desc">Make environmental impact visible without greenwashing. Real metrics, honest progress, meaningful contribution to circularity.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Principles -->
+            <section id="principles">
+                <h2>Design Principles</h2>
+                
+                <h3>1. Enterprise Sophistication</h3>
+                <p>Our users are business professionals making high-value decisions. The interface reflects the gravity of these transactions through refined typography, purposeful use of white space, and a sophisticated color palette that signals credibility.</p>
+                
+                <h3>2. Data-Dense Clarity</h3>
+                <p>Unlike consumer marketplaces, B2B users need comprehensive information upfront. Material specifications, quality certifications, pricing history, and seller credentials should be scannable yet detailed. Progressive disclosure reveals complexity without overwhelming initial impressions.</p>
+                
+                <h3>3. Honest Sustainability</h3>
+                <p>Circular economy metrics matter, but only when they're verifiable. Show carbon offsets, material circularity rates, and landfill diversion — but always with data sources. Impact visibility without empty claims.</p>
+                
+                <h3>4. Refined Efficiency</h3>
+                <p>Speed doesn't require sacrifice of beauty. Optimized loading, intelligent caching, and streamlined interactions create efficiency that feels effortless, not rushed.</p>
+                
+                <div class="callout">
+                    <div class="callout-title">Remember</div>
+                    <div class="callout-body">Every pixel should either inform, guide, or build trust. Decoration for its own sake has no place in a tool designed for business.</div>
+                </div>
+            </section>
+
+            <!-- Color -->
+            <section id="color">
+                <h2>Color</h2>
+                <p>Our color system balances the organic nature of circularity with the precision of enterprise software. Green anchors our circular economy mission, while refined grays provide a professional foundation.</p>
+                
+                <h3>Primary Palette</h3>
+                <div class="color-grid">
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: linear-gradient(135deg, #00875A 0%, #00C7BE 100%);"></div>
+                        <div class="color-info">
+                            <div class="color-name">Brand Gradient</div>
+                            <div class="color-value">#00875A → #00C7BE</div>
+                            <div class="color-usage">Logo, hero sections, premium features</div>
+                        </div>
+                    </div>
+                    
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: #00875A;"></div>
+                        <div class="color-info">
+                            <div class="color-name">Green Primary</div>
+                            <div class="color-value">#00875A</div>
+                            <div class="color-usage">Primary actions, verified states, success</div>
+                        </div>
+                    </div>
+                    
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: #E3F5EE;"></div>
+                        <div class="color-info">
+                            <div class="color-name">Green Light</div>
+                            <div class="color-value">#E3F5EE</div>
+                            <div class="color-usage">Badges, hover states, subtle highlights</div>
+                        </div>
+                    </div>
+                    
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: #0066CC;"></div>
+                        <div class="color-info">
+                            <div class="color-name">Blue Primary</div>
+                            <div class="color-value">#0066CC</div>
+                            <div class="color-usage">Links, informational elements, trust signals</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Neutral Palette</h3>
+                <p>Grays provide hierarchy and structure. Use lighter grays for backgrounds and borders, darker grays for text and icons.</p>
+                
+                <div class="color-grid">
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: #1D1D1F;"></div>
+                        <div class="color-info">
+                            <div class="color-name">Gray 900</div>
+                            <div class="color-value">#1D1D1F</div>
+                            <div class="color-usage">Headings, primary text</div>
+                        </div>
+                    </div>
+                    
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: #616161;"></div>
+                        <div class="color-info">
+                            <div class="color-name">Gray 700</div>
+                            <div class="color-value">#616161</div>
+                            <div class="color-usage">Body text, secondary elements</div>
+                        </div>
+                    </div>
+                    
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: #9E9E9E;"></div>
+                        <div class="color-info">
+                            <div class="color-name">Gray 500</div>
+                            <div class="color-value">#9E9E9E</div>
+                            <div class="color-usage">Placeholders, disabled states</div>
+                        </div>
+                    </div>
+                    
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: #F5F5F5;"></div>
+                        <div class="color-info">
+                            <div class="color-name">Gray 100</div>
+                            <div class="color-value">#F5F5F5</div>
+                            <div class="color-usage">Backgrounds, surfaces, hover states</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Data Visualization</h3>
+                <p>Use these colors for charts, material categories, and impact metrics.</p>
+                
+                <div class="color-grid">
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: #FF9500;"></div>
+                        <div class="color-info">
+                            <div class="color-name">Amber</div>
+                            <div class="color-value">#FF9500</div>
+                        </div>
+                    </div>
+                    
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: #00C7BE;"></div>
+                        <div class="color-info">
+                            <div class="color-name">Teal</div>
+                            <div class="color-value">#00C7BE</div>
+                        </div>
+                    </div>
+                    
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: #007AFF;"></div>
+                        <div class="color-info">
+                            <div class="color-name">Blue</div>
+                            <div class="color-value">#007AFF</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Color Usage</h3>
+                
+                <div class="example-grid">
+                    <div class="example-card do">
+                        <div class="example-header">✓ Do</div>
+                        <div class="example-body">
+                            <p style="margin-bottom: 16px;"><strong>Use green for circular economy actions</strong></p>
+                            <div class="badge-row">
+                                <div class="badge badge-verified">✓ Verified Seller</div>
+                                <div class="badge badge-certified">100% Circular</div>
+                            </div>
+                            <button class="btn btn-primary" style="margin-top: 12px;">List Material</button>
+                        </div>
+                    </div>
+                    
+                    <div class="example-card dont">
+                        <div class="example-header">✗ Don't</div>
+                        <div class="example-body">
+                            <p style="margin-bottom: 16px;"><strong>Don't overuse green for generic actions</strong></p>
+                            <button class="btn btn-primary" style="margin-bottom: 8px;">Download Invoice</button>
+                            <button class="btn btn-primary" style="margin-bottom: 8px;">Edit Profile</button>
+                            <button class="btn btn-primary">View Messages</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Typography -->
+            <section id="typography">
+                <h2>Typography</h2>
+                <p>Inter provides exceptional legibility at all sizes and weights. Its broad range of weights enables clear hierarchy without relying on size alone.</p>
+                
+                <h3>Type Scale</h3>
+                <div class="type-scale">
+                    <div class="type-example">
+                        <div class="type-label">Large Title</div>
+                        <div style="font-size: 56px; font-weight: 700; letter-spacing: -0.025em; line-height: 1.07;">Premium Recycled Materials</div>
+                        <div class="type-specs">56px / 60px line / -2.5% tracking / Bold 700</div>
+                    </div>
+                    
+                    <div class="type-example">
+                        <div class="type-label">Title 1</div>
+                        <div style="font-size: 40px; font-weight: 700; letter-spacing: -0.022em; line-height: 1.15;">Post-Consumer PET Bottles</div>
+                        <div class="type-specs">40px / 46px line / -2.2% tracking / Bold 700</div>
+                    </div>
+                    
+                    <div class="type-example">
+                        <div class="type-label">Title 2</div>
+                        <div style="font-size: 28px; font-weight: 600; letter-spacing: -0.015em; line-height: 1.25;">Material Specifications</div>
+                        <div class="type-specs">28px / 35px line / -1.5% tracking / Semibold 600</div>
+                    </div>
+                    
+                    <div class="type-example">
+                        <div class="type-label">Title 3</div>
+                        <div style="font-size: 21px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.38;">Seller Information</div>
+                        <div class="type-specs">21px / 29px line / -1% tracking / Semibold 600</div>
+                    </div>
+                    
+                    <div class="type-example">
+                        <div class="type-label">Body</div>
+                        <div style="font-size: 17px; line-height: 1.65; letter-spacing: -0.01em;">High-quality baled PET bottles sourced from verified collection centers. Meets FSSAI and ISO standards for food-grade recycling applications.</div>
+                        <div class="type-specs">17px / 28px line / -1% tracking / Regular 400</div>
+                    </div>
+                    
+                    <div class="type-example">
+                        <div class="type-label">Callout</div>
+                        <div style="font-size: 15px; font-weight: 500; line-height: 1.55; letter-spacing: -0.01em;">Available quantity: 5,000 kg • Location: Mumbai, Maharashtra</div>
+                        <div class="type-specs">15px / 23px line / -1% tracking / Medium 500</div>
+                    </div>
+                    
+                    <div class="type-example">
+                        <div class="type-label">Caption</div>
+                        <div style="font-size: 13px; color: #757575; line-height: 1.5;">Last updated 2 hours ago • Verified seller</div>
+                        <div class="type-specs">13px / 19px line / Regular 400</div>
+                    </div>
+                </div>
+                
+                <h3>Typographic Hierarchy</h3>
+                <ul>
+                    <li><strong>Material names:</strong> Title 1 (40px Bold) for primary focus, Title 2 (28px Semibold) for category headers</li>
+                    <li><strong>Body copy:</strong> 17px Regular with generous line height (1.65) for readability in long descriptions</li>
+                    <li><strong>Metadata:</strong> 13-15px Regular/Medium in Gray 600 for timestamps, locations, quantities</li>
+                    <li><strong>Data values:</strong> SF Mono for prices, weights, and SKU codes — monospace aids comparison</li>
+                    <li><strong>Buttons:</strong> 15px Medium, letter-spacing -1% for optimal legibility</li>
+                </ul>
+                
+                <div class="callout">
+                    <div class="callout-title">Type Pairing</div>
+                    <div class="callout-body">Use Inter for all interface text. Reserve SF Mono exclusively for technical values (prices, quantities, codes, timestamps). Never mix multiple display fonts — consistency signals professionalism.</div>
+                </div>
+            </section>
+
+            <!-- Layout & Spacing -->
+            <section id="layout">
+                <h2>Layout & Spacing</h2>
+                <p>Our layout system is built on an 8-point grid, creating visual rhythm and alignment across all screen sizes.</p>
+                
+                <h3>8-Point Grid System</h3>
+                <p>All spacing, component sizing, and positioning should align to multiples of 8px. This creates consistency and makes responsive design predictable.</p>
+                
+                <div class="spacing-demo">
+                    <div class="spacing-box" style="width: 32px; height: 32px;">4px</div>
+                    <div class="spacing-box" style="width: 64px; height: 32px;">8px</div>
+                    <div class="spacing-box" style="width: 96px; height: 32px;">12px</div>
+                    <div class="spacing-box" style="width: 128px; height: 32px;">16px</div>
+                    <div class="spacing-box" style="width: 192px; height: 32px;">24px</div>
+                    <div class="spacing-box" style="width: 256px; height: 32px;">32px</div>
+                </div>
+                
+                <h3>Spacing Scale</h3>
+                <table class="data-table" style="margin: 24px 0;">
+                    <thead>
+                        <tr>
+                            <th>Token</th>
+                            <th>Value</th>
+                            <th>Usage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>space-1</code></td>
+                            <td>4px</td>
+                            <td>Icon gaps, tight inline spacing</td>
+                        </tr>
+                        <tr>
+                            <td><code>space-2</code></td>
+                            <td>8px</td>
+                            <td>Text-to-icon spacing, compact components</td>
+                        </tr>
+                        <tr>
+                            <td><code>space-4</code></td>
+                            <td>16px</td>
+                            <td>Default component padding, related elements</td>
+                        </tr>
+                        <tr>
+                            <td><code>space-6</code></td>
+                            <td>24px</td>
+                            <td>Section spacing, card padding</td>
+                        </tr>
+                        <tr>
+                            <td><code>space-8</code></td>
+                            <td>32px</td>
+                            <td>Large component spacing, subsection breaks</td>
+                        </tr>
+                        <tr>
+                            <td><code>space-12</code></td>
+                            <td>48px</td>
+                            <td>Major section breaks, page rhythm</td>
+                        </tr>
+                        <tr>
+                            <td><code>space-16</code></td>
+                            <td>64px</td>
+                            <td>Page margins, hero sections</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>Container Widths</h3>
+                <ul>
+                    <li><strong>Max content width:</strong> 1280px (optimal for desktop viewing)</li>
+                    <li><strong>Reading width:</strong> 840px (ideal for text-heavy content)</li>
+                    <li><strong>Form width:</strong> 600px (comfortable for data entry)</li>
+                    <li><strong>Mobile breakpoint:</strong> 640px (transition to single column)</li>
+                </ul>
+                
+                <h3>Grid Examples</h3>
+                <p>Use CSS Grid for complex layouts. Define explicit columns for predictable behavior.</p>
+                
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-image">📋</div>
+                        <div class="card-content">
+                            <div class="card-title">2-Column Grid</div>
+                            <div class="card-desc">Ideal for comparison views, before/after, do/don't examples</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-image">🎯</div>
+                        <div class="card-content">
+                            <div class="card-title">3-Column Grid</div>
+                            <div class="card-desc">Feature cards, principle explanations, material categories</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-image">📊</div>
+                        <div class="card-content">
+                            <div class="card-title">4-Column Grid</div>
+                            <div class="card-desc">Metadata displays, quick stats, icon arrays</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Motion -->
+            <section id="motion">
+                <h2>Motion</h2>
+                <p>Motion should feel responsive and purposeful, never gratuitous. Use animation to guide attention, provide feedback, and create spatial relationships.</p>
+                
+                <h3>Timing & Easing</h3>
+                <ul>
+                    <li><strong>Swift (0.2s):</strong> Hover states, button presses, toggle switches — immediate feedback</li>
+                    <li><strong>Standard (0.3s):</strong> Card reveals, dropdown menus, modal appearance — comfortable pacing</li>
+                    <li><strong>Deliberate (0.4s):</strong> Page transitions, data loading, complex animations — unhurried elegance</li>
+                    <li><strong>Easing:</strong> <code>cubic-bezier(0.4, 0, 0.2, 1)</code> for all transitions (Apple's standard easing)</li>
+                </ul>
+                
+                <div class="showcase">
+                    <div class="showcase-title">Interactive Examples</div>
+                    <div class="showcase-desc">Hover these elements to see motion in action</div>
+                    
+                    <div class="button-row">
+                        <button class="btn btn-primary">Hover for Lift</button>
+                        <button class="btn btn-secondary">Subtle Background</button>
+                        <button class="btn btn-tertiary">Gentle Change</button>
+                    </div>
+                    
+                    <div class="card-grid" style="margin-top: 24px;">
+                        <div class="card">
+                            <div class="card-image">🎨</div>
+                            <div class="card-content">
+                                <div class="card-title">Card Lift</div>
+                                <div class="card-desc">Cards lift 2px on hover with shadow growth</div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-image">⚡</div>
+                            <div class="card-content">
+                                <div class="card-title">Border Transition</div>
+                                <div class="card-desc">Border color shifts smoothly to brand green</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Motion Principles</h3>
+                <ul>
+                    <li><strong>No animation by default:</strong> Motion is opt-in. Static by default respects user preferences and performance.</li>
+                    <li><strong>Consistent easing:</strong> Use one easing curve throughout. Visual consistency matters more than varied effects.</li>
+                    <li><strong>Respect reduced motion:</strong> Always check <code>prefers-reduced-motion</code> and provide instant fallbacks.</li>
+                    <li><strong>Performance first:</strong> Transform and opacity only. Avoid animating layout properties (width, height, top, left).</li>
+                </ul>
+            </section>
+
+            <!-- Imagery -->
+            <section id="imagery">
+                <h2>Imagery</h2>
+                <p>Photography should be authentic, unstyled, and focused on materials and processes. Avoid stock imagery — real materials, real facilities, real people.</p>
+                
+                <h3>Photography Style</h3>
+                <ul>
+                    <li><strong>Materials:</strong> Clean, well-lit product shots. Show texture and quality. Natural lighting preferred.</li>
+                    <li><strong>Facilities:</strong> Wide shots showing scale and cleanliness. Highlight sorting, processing, and quality control.</li>
+                    <li><strong>People:</strong> Candid over posed. Show actual work — inspecting materials, operating equipment, reviewing documentation.</li>
+                    <li><strong>Environmental context:</strong> Avoid greenwashing. If showing environmental benefit, use data visualization, not forests and leaves.</li>
+                </ul>
+                
+                <h3>Image Guidelines</h3>
+                <div class="example-grid">
+                    <div class="example-card do">
+                        <div class="example-header">✓ Do</div>
+                        <div class="example-body">
+                            <p><strong>Authentic material photography</strong></p>
+                            <ul style="margin-top: 12px; font-size: 14px; line-height: 1.6;">
+                                <li>Clear, detailed shots of actual materials</li>
+                                <li>Consistent lighting and backgrounds</li>
+                                <li>Multiple angles showing quality</li>
+                                <li>Real facility photos</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="example-card dont">
+                        <div class="example-header">✗ Don't</div>
+                        <div class="example-body">
+                            <p><strong>Generic stock imagery</strong></p>
+                            <ul style="margin-top: 12px; font-size: 14px; line-height: 1.6;">
+                                <li>Stock photos of people pointing at screens</li>
+                                <li>Generic green nature backgrounds</li>
+                                <li>Overly processed or filtered images</li>
+                                <li>Symbolic representations instead of real materials</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Iconography -->
+            <section id="iconography">
+                <h2>Iconography</h2>
+                <p>Icons convey meaning instantly. Our icon system uses consistent geometry, stroke weight, and style to create a unified visual language across the platform.</p>
+                
+                <h3>Icon System Principles</h3>
+                
+                <div class="grid grid-2" style="margin: 48px 0;">
+                    <div style="background: linear-gradient(135deg, var(--green-light) 0%, var(--teal-light) 100%); padding: 64px; border-radius: 18px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                        <svg width="120" height="120" viewBox="0 0 120 120" style="margin-bottom: 24px;">
+                            <circle cx="60" cy="60" r="54" fill="none" stroke="var(--green-primary)" stroke-width="3"/>
+                            <path d="M 40 60 L 52 72 L 80 44" fill="none" stroke="var(--green-primary)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <div style="font-weight: 600; font-size: 17px; color: var(--gray-900);">24px Icon Grid</div>
+                        <div style="font-size: 15px; color: var(--gray-600); margin-top: 8px;">2px stroke • Rounded caps</div>
+                    </div>
+                    
+                    <div style="background: var(--gray-50); padding: 48px; border-radius: 18px; border: 1px solid var(--gray-200);">
+                        <div style="margin-bottom: 32px;">
+                            <div style="font-size: 13px; color: var(--gray-600); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;">Stroke Weight</div>
+                            <div style="font-family: var(--font-mono); font-size: 32px; font-weight: 600;">2px</div>
+                        </div>
+                        <div style="margin-bottom: 32px;">
+                            <div style="font-size: 13px; color: var(--gray-600); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;">Corner Radius</div>
+                            <div style="font-family: var(--font-mono); font-size: 32px; font-weight: 600;">2px</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 13px; color: var(--gray-600); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;">Grid Unit</div>
+                            <div style="font-family: var(--font-mono); font-size: 32px; font-weight: 600;">4px</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Icon Sizes</h3>
+                <div style="display: flex; gap: 32px; align-items: flex-end; margin: 48px 0; padding: 48px; background: white; border-radius: 18px; border: 1px solid var(--gray-200);">
+                    <div style="text-align: center;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" style="display: block; margin: 0 auto 12px;">
+                            <circle cx="12" cy="12" r="10" fill="none" stroke="var(--gray-700)" stroke-width="2"/>
+                            <path d="M 8 12 L 11 15 L 16 10" fill="none" stroke="var(--gray-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <div style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: var(--gray-900);">16px</div>
+                        <div style="font-size: 12px; color: var(--gray-600); margin-top: 4px;">Inline text</div>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" style="display: block; margin: 0 auto 12px;">
+                            <circle cx="12" cy="12" r="10" fill="none" stroke="var(--gray-700)" stroke-width="2"/>
+                            <path d="M 8 12 L 11 15 L 16 10" fill="none" stroke="var(--gray-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <div style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: var(--gray-900);">20px</div>
+                        <div style="font-size: 12px; color: var(--gray-600); margin-top: 4px;">Buttons</div>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" style="display: block; margin: 0 auto 12px;">
+                            <circle cx="12" cy="12" r="10" fill="none" stroke="var(--green-primary)" stroke-width="2"/>
+                            <path d="M 8 12 L 11 15 L 16 10" fill="none" stroke="var(--green-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <div style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: var(--gray-900);">24px</div>
+                        <div style="font-size: 12px; color: var(--gray-600); margin-top: 4px;">Primary</div>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" style="display: block; margin: 0 auto 12px;">
+                            <circle cx="12" cy="12" r="10" fill="none" stroke="var(--gray-700)" stroke-width="2"/>
+                            <path d="M 8 12 L 11 15 L 16 10" fill="none" stroke="var(--gray-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <div style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: var(--gray-900);">32px</div>
+                        <div style="font-size: 12px; color: var(--gray-600); margin-top: 4px;">Feature</div>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <svg width="48" height="48" viewBox="0 0 24 24" style="display: block; margin: 0 auto 12px;">
+                            <circle cx="12" cy="12" r="10" fill="none" stroke="var(--gray-700)" stroke-width="2"/>
+                            <path d="M 8 12 L 11 15 L 16 10" fill="none" stroke="var(--gray-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <div style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: var(--gray-900);">48px</div>
+                        <div style="font-size: 12px; color: var(--gray-600); margin-top: 4px;">Hero</div>
+                    </div>
+                </div>
+                
+                <h3>Core Icon Set</h3>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin: 48px 0;">
+                    <div style="text-align: center; padding: 32px; background: var(--gray-50); border-radius: 14px; border: 1px solid var(--gray-200); transition: all 0.3s;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" style="margin: 0 auto 16px; display: block;">
+                            <circle cx="12" cy="12" r="10" fill="none" stroke="var(--green-primary)" stroke-width="2"/>
+                            <path d="M 8 12 L 11 15 L 16 10" fill="none" stroke="var(--green-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <div style="font-size: 14px; font-weight: 600; color: var(--gray-900);">Verified</div>
+                    </div>
+                    
+                    <div style="text-align: center; padding: 32px; background: var(--gray-50); border-radius: 14px; border: 1px solid var(--gray-200);">
+                        <svg width="32" height="32" viewBox="0 0 24 24" style="margin: 0 auto 16px; display: block;">
+                            <rect x="5" y="7" width="14" height="12" rx="2" fill="none" stroke="var(--gray-700)" stroke-width="2"/>
+                            <path d="M 9 7 V 5 C 9 3.9 9.9 3 11 3 H 13 C 14.1 3 15 3.9 15 5 V 7" fill="none" stroke="var(--gray-700)" stroke-width="2"/>
+                        </svg>
+                        <div style="font-size: 14px; font-weight: 600; color: var(--gray-900);">Material</div>
+                    </div>
+                    
+                    <div style="text-align: center; padding: 32px; background: var(--gray-50); border-radius: 14px; border: 1px solid var(--gray-200);">
+                        <svg width="32" height="32" viewBox="0 0 24 24" style="margin: 0 auto 16px; display: block;">
+                            <path d="M 12 2 L 12 12 M 12 12 L 17 12 M 12 12 C 12 16.4 8.4 20 4 20 M 12 12 C 12 16.4 15.6 20 20 20" fill="none" stroke="var(--gray-700)" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <div style="font-size: 14px; font-weight: 600; color: var(--gray-900);">Circular</div>
+                    </div>
+                    
+                    <div style="text-align: center; padding: 32px; background: var(--gray-50); border-radius: 14px; border: 1px solid var(--gray-200);">
+                        <svg width="32" height="32" viewBox="0 0 24 24" style="margin: 0 auto 16px; display: block;">
+                            <circle cx="12" cy="12" r="9" fill="none" stroke="var(--gray-700)" stroke-width="2"/>
+                            <path d="M 9 10 L 15 10 M 9 14 L 13 14" stroke="var(--gray-700)" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <div style="font-size: 14px; font-weight: 600; color: var(--gray-900);">Location</div>
+                    </div>
+                    
+                    <div style="text-align: center; padding: 32px; background: var(--gray-50); border-radius: 14px; border: 1px solid var(--gray-200);">
+                        <svg width="32" height="32" viewBox="0 0 24 24" style="margin: 0 auto 16px; display: block;">
+                            <path d="M 6 8 L 10 12 L 6 16 M 11 16 L 18 16" fill="none" stroke="var(--gray-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <div style="font-size: 14px; font-weight: 600; color: var(--gray-900);">Transaction</div>
+                    </div>
+                    
+                    <div style="text-align: center; padding: 32px; background: var(--gray-50); border-radius: 14px; border: 1px solid var(--gray-200);">
+                        <svg width="32" height="32" viewBox="0 0 24 24" style="margin: 0 auto 16px; display: block;">
+                            <circle cx="12" cy="12" r="9" fill="none" stroke="var(--gray-700)" stroke-width="2"/>
+                            <path d="M 12 7 L 12 12 L 15 15" stroke="var(--gray-700)" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <div style="font-size: 14px; font-weight: 600; color: var(--gray-900);">Time</div>
+                    </div>
+                    
+                    <div style="text-align: center; padding: 32px; background: var(--gray-50); border-radius: 14px; border: 1px solid var(--gray-200);">
+                        <svg width="32" height="32" viewBox="0 0 24 24" style="margin: 0 auto 16px; display: block;">
+                            <circle cx="11" cy="11" r="7" fill="none" stroke="var(--gray-700)" stroke-width="2"/>
+                            <path d="M 18 18 L 21 21" stroke="var(--gray-700)" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <div style="font-size: 14px; font-weight: 600; color: var(--gray-900);">Search</div>
+                    </div>
+                    
+                    <div style="text-align: center; padding: 32px; background: var(--gray-50); border-radius: 14px; border: 1px solid var(--gray-200);">
+                        <svg width="32" height="32" viewBox="0 0 24 24" style="margin: 0 auto 16px; display: block;">
+                            <path d="M 4 18 L 4 8 C 4 6.9 4.9 6 6 6 L 18 6 C 19.1 6 20 6.9 20 8 L 20 18 M 8 18 L 16 18" fill="none" stroke="var(--gray-700)" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M 8 10 L 16 10" stroke="var(--gray-700)" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <div style="font-size: 14px; font-weight: 600; color: var(--gray-900);">Quality</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Components: Buttons -->
+            <section id="buttons">
+                <h2>Buttons</h2>
+                <p>Buttons drive action and communicate hierarchy. Each button style signals importance—from primary commitments to secondary explorations to tertiary alternatives.</p>
+                
+                <h3>Button Anatomy</h3>
+                <div style="background: linear-gradient(135deg, var(--gray-50) 0%, white 100%); padding: 64px; border-radius: 18px; border: 1px solid var(--gray-200); margin: 48px 0;">
+                    <button class="btn btn-primary btn-large" style="margin: 0 auto; display: block; position: relative;">
+                        List Material
+                    </button>
+                    <div style="max-width: 500px; margin: 48px auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; font-size: 14px;">
+                        <div>
+                            <div style="color: var(--gray-600); margin-bottom: 4px;">Padding</div>
+                            <div style="font-family: var(--font-mono); font-weight: 600;">14px 28px</div>
+                        </div>
+                        <div>
+                            <div style="color: var(--gray-600); margin-bottom: 4px;">Font Size</div>
+                            <div style="font-family: var(--font-mono); font-weight: 600;">17px Medium</div>
+                        </div>
+                        <div>
+                            <div style="color: var(--gray-600); margin-bottom: 4px;">Border Radius</div>
+                            <div style="font-family: var(--font-mono); font-weight: 600;">14px</div>
+                        </div>
+                        <div>
+                            <div style="color: var(--gray-600); margin-bottom: 4px;">Letter Spacing</div>
+                            <div style="font-family: var(--font-mono); font-weight: 600;">-0.01em</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Primary Actions</h3>
+                <p style="color: var(--gray-600); margin-bottom: 32px;">For high-commitment actions: listing materials, placing bids, completing purchases. Use sparingly—one primary per section.</p>
+                
+                <div style="background: white; padding: 48px; border-radius: 18px; border: 1px solid var(--gray-200); margin-bottom: 32px;">
+                    <div class="button-row" style="justify-content: center;">
+                        <button class="btn btn-primary btn-large">List Material</button>
+                        <button class="btn btn-primary">Place Bid</button>
+                        <button class="btn btn-primary btn-small">Submit</button>
+                    </div>
+                </div>
+                
+                <h3>Secondary Actions</h3>
+                <p style="color: var(--gray-600); margin-bottom: 32px;">For important supporting actions: viewing details, saving listings, contacting sellers. Visible but not competing with primary.</p>
+                
+                <div style="background: white; padding: 48px; border-radius: 18px; border: 1px solid var(--gray-200); margin-bottom: 32px;">
+                    <div class="button-row" style="justify-content: center;">
+                        <button class="btn btn-secondary btn-large">View Details</button>
+                        <button class="btn btn-secondary">Save Listing</button>
+                        <button class="btn btn-secondary btn-small">Contact</button>
+                    </div>
+                </div>
+                
+                <h3>Tertiary Actions</h3>
+                <p style="color: var(--gray-600); margin-bottom: 32px;">For low-priority or potentially destructive actions: canceling, deleting, navigating back. Subtle and unobtrusive.</p>
+                
+                <div style="background: white; padding: 48px; border-radius: 18px; border: 1px solid var(--gray-200); margin-bottom: 48px;">
+                    <div class="button-row" style="justify-content: center;">
+                        <button class="btn btn-tertiary btn-large">Cancel</button>
+                        <button class="btn btn-tertiary">Edit Draft</button>
+                        <button class="btn btn-tertiary btn-small">Delete</button>
+                    </div>
+                </div>
+                
+                <h3>Button States</h3>
+                <div class="grid grid-2" style="margin: 48px 0;">
+                    <div style="background: var(--gray-50); padding: 40px; border-radius: 14px; border: 1px solid var(--gray-200);">
+                        <div style="font-weight: 600; margin-bottom: 24px; color: var(--gray-900);">Interactive States</div>
+                        <div style="display: flex; flex-direction: column; gap: 16px;">
+                            <div>
+                                <div style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;">Default</div>
+                                <button class="btn btn-primary">Place Bid</button>
+                            </div>
+                            <div>
+                                <div style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;">Disabled (40% opacity)</div>
+                                <button class="btn btn-primary" style="opacity: 0.4; cursor: not-allowed;">Place Bid</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: var(--gray-50); padding: 40px; border-radius: 14px; border: 1px solid var(--gray-200);">
+                        <div style="font-weight: 600; margin-bottom: 24px; color: var(--gray-900);">Loading State</div>
+                        <button class="btn btn-primary" style="position: relative;">
+                            <span style="opacity: 0;">Processing</span>
+                            <span style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);">
+                                <svg width="16" height="16" viewBox="0 0 16 16" style="animation: spin 1s linear infinite;">
+                                    <circle cx="8" cy="8" r="6" fill="none" stroke="white" stroke-width="2" stroke-dasharray="31.4 31.4" stroke-dashoffset="0" opacity="0.3"/>
+                                    <circle cx="8" cy="8" r="6" fill="none" stroke="white" stroke-width="2" stroke-dasharray="31.4 31.4" stroke-dashoffset="7.85" stroke-linecap="round"/>
+                                </svg>
+                            </span>
+                        </button>
+                        <style>
+                            @keyframes spin {
+                                to { transform: rotate(360deg); }
+                            }
+                        </style>
+                    </div>
+                </div>
+                
+                <h3>Button Hierarchy in Context</h3>
+                
+                <div style="background: linear-gradient(to bottom, white, var(--gray-50)); padding: 48px; border-radius: 18px; border: 1px solid var(--gray-200); margin: 48px 0;">
+                    <div style="max-width: 500px; margin: 0 auto;">
+                        <h4 style="margin-bottom: 8px;">High-Quality Post-Consumer PET Bottles</h4>
+                        <p style="font-size: 15px; color: var(--gray-600); margin-bottom: 24px;">5,000 kg available • ₹48/kg • Mumbai, Maharashtra</p>
+                        
+                        <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+                            <button class="btn btn-primary" style="flex: 1;">Place Bid</button>
+                            <button class="btn btn-secondary" style="flex: 1;">Save Listing</button>
+                        </div>
+                        
+                        <button class="btn btn-tertiary" style="width: 100%;">Contact Seller</button>
+                    </div>
+                </div>
+                
+                <div class="callout">
+                    <div class="callout-title">Button Hierarchy Rule</div>
+                    <div class="callout-body">One primary button per decision point. Multiple primaries compete for attention and dilute the main action. If everything is important, nothing is.</div>
+                </div>
+            </section>
+
+            <!-- Badges -->
+            <section id="badges">
+                <h2>Badges & Labels</h2>
+                <p>Badges communicate status, verification, and categorization at a glance. Use them consistently to build trust and aid scanning.</p>
+                
+                <h3>Badge Types</h3>
+                
+                <div class="showcase">
+                    <div class="showcase-title">Trust & Verification</div>
+                    <div class="badge-row">
+                        <div class="badge badge-verified">✓ Verified Seller</div>
+                        <div class="badge badge-premium">Premium Buyer</div>
+                        <div class="badge badge-certified">ISO Certified</div>
+                    </div>
+                </div>
+                
+                <div class="showcase">
+                    <div class="showcase-title">Material Properties</div>
+                    <div class="badge-row">
+                        <div class="badge badge-certified">100% Circular</div>
+                        <div class="badge badge-premium">Lab Tested</div>
+                        <div class="badge badge-new">New Listing</div>
+                    </div>
+                </div>
+                
+                <div class="showcase">
+                    <div class="showcase-title">Status Indicators</div>
+                    <div class="badge-row">
+                        <div class="badge badge-verified">Available</div>
+                        <div class="badge badge-new">Low Stock</div>
+                        <div class="badge" style="background: #FFE5E5; color: #CC0000;">Sold Out</div>
+                    </div>
+                </div>
+                
+                <h3>Badge Placement</h3>
+                <p>Position badges near the element they describe. For seller names, place inline. For materials, position near the title or in a dedicated metadata row.</p>
+                
+                <div style="background: white; padding: 32px; border: 1px solid var(--gray-200); border-radius: 14px; margin: 32px 0;">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                        <h4 style="margin: 0; font-size: 21px;">Greentech Recyclers Pvt Ltd</h4>
+                        <div class="badge badge-verified">✓ Verified</div>
+                        <div class="badge badge-premium">Premium</div>
+                    </div>
+                    <div style="font-size: 15px; color: var(--gray-600);">Mumbai, Maharashtra • 247 successful transactions • 4.9★</div>
+                </div>
+                
+                <div class="code-block">
+<span class="code-comment">/* Verification Badge */</span>
+.<span class="code-keyword">badge-verified</span> {
+  display: <span class="code-string">inline-flex</span>;
+  align-items: <span class="code-string">center</span>;
+  gap: <span class="code-string">4px</span>;
+  padding: <span class="code-string">5px 12px</span>;
+  background: <span class="code-string">var(--green-light)</span>;
+  color: <span class="code-string">var(--green-dark)</span>;
+  border-radius: <span class="code-string">6px</span>;
+  font-size: <span class="code-string">13px</span>;
+  font-weight: <span class="code-string">600</span>;
+}
+                </div>
+            </section>
+
+            <!-- Cards -->
+            <section id="cards">
+                <h2>Cards</h2>
+                <p>Cards group related information and create scannable layouts. Use them for material listings, seller profiles, and dashboard widgets.</p>
+                
+                <h3>Material Listing Card</h3>
+                
+                <div class="card" style="max-width: 400px; margin: 24px 0;">
+                    <div class="card-image" style="background: linear-gradient(135deg, #E3F5EE 0%, #E5F9F8 100%); font-size: 64px;">📦</div>
+                    <div class="card-content">
+                        <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                            <div class="badge badge-verified">✓ Verified</div>
+                            <div class="badge badge-certified">100% Circular</div>
+                        </div>
+                        <div class="card-title">Post-Consumer PET Bottles (Clear)</div>
+                        <div class="card-desc">High-quality baled PET bottles from verified collection centers. ISO 9001:2015 certified processing.</div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; padding: 16px; background: var(--gray-50); border-radius: 8px;">
+                            <div>
+                                <div style="font-size: 13px; color: var(--gray-600); margin-bottom: 4px;">Quantity</div>
+                                <div style="font-family: var(--font-mono); font-size: 17px; font-weight: 600;">5,000 kg</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 13px; color: var(--gray-600); margin-bottom: 4px;">Price</div>
+                                <div style="font-family: var(--font-mono); font-size: 17px; font-weight: 600;">₹48/kg</div>
+                            </div>
+                        </div>
+                        <div class="card-meta">
+                            <span>📍 Mumbai, MH</span>
+                            <span>•</span>
+                            <span>Updated 2h ago</span>
+                        </div>
+                        <div style="display: flex; gap: 12px; margin-top: 20px;">
+                            <button class="btn btn-primary" style="flex: 1;">Place Bid</button>
+                            <button class="btn btn-secondary" style="flex: 1;">View Details</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Card Variants</h3>
+                <ul>
+                    <li><strong>Listing card:</strong> Material image, title, specs, price, actions</li>
+                    <li><strong>Seller card:</strong> Logo, name, verification, stats, contact</li>
+                    <li><strong>Transaction card:</strong> Material, seller, buyer, amount, status, timeline</li>
+                    <li><strong>Stat card:</strong> Metric label, value, change indicator, sparkline</li>
+                </ul>
+            </section>
+
+            <!-- Forms -->
+            <section id="forms">
+                <h2>Forms</h2>
+                <p>Forms should feel lightweight and intelligent. Use smart defaults, contextual help, and progressive validation to reduce cognitive load.</p>
+                
+                <h3>Input Fields</h3>
+                
+                <div class="showcase">
+                    <div style="max-width: 500px;">
+                        <div style="margin-bottom: 24px;">
+                            <label style="display: block; font-size: 15px; font-weight: 600; color: var(--gray-900); margin-bottom: 8px;">Material Name</label>
+                            <input type="text" placeholder="e.g., Post-Consumer PET Bottles" style="width: 100%; padding: 12px 16px; border: 1.5px solid var(--gray-300); border-radius: 10px; font-size: 15px; font-family: var(--font-text); transition: border-color 0.2s;">
+                            <div style="font-size: 13px; color: var(--gray-600); margin-top: 6px;">Be specific about material type and quality</div>
+                        </div>
+                        
+                        <div style="margin-bottom: 24px;">
+                            <label style="display: block; font-size: 15px; font-weight: 600; color: var(--gray-900); margin-bottom: 8px;">Description</label>
+                            <textarea placeholder="Describe material condition, source, certifications..." style="width: 100%; padding: 12px 16px; border: 1.5px solid var(--gray-300); border-radius: 10px; font-size: 15px; font-family: var(--font-text); min-height: 100px; resize: vertical;"></textarea>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                            <div>
+                                <label style="display: block; font-size: 15px; font-weight: 600; color: var(--gray-900); margin-bottom: 8px;">Quantity (kg)</label>
+                                <input type="number" placeholder="5000" style="width: 100%; padding: 12px 16px; border: 1.5px solid var(--gray-300); border-radius: 10px; font-size: 15px; font-family: var(--font-mono);">
+                            </div>
+                            <div>
+                                <label style="display: block; font-size: 15px; font-weight: 600; color: var(--gray-900); margin-bottom: 8px;">Price per kg (₹)</label>
+                                <input type="number" placeholder="48.00" style="width: 100%; padding: 12px 16px; border: 1.5px solid var(--gray-300); border-radius: 10px; font-size: 15px; font-family: var(--font-mono);">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Form Guidelines</h3>
+                <ul>
+                    <li><strong>Label positioning:</strong> Above input, 8px margin. Never inside inputs as placeholders.</li>
+                    <li><strong>Required fields:</strong> Asterisk (*) next to label, explain at form top</li>
+                    <li><strong>Help text:</strong> Below input, Gray 600, 13px. Contextual, not repetitive.</li>
+                    <li><strong>Validation:</strong> Inline on blur, not on every keystroke. Show success subtly.</li>
+                    <li><strong>Error states:</strong> Red border (1.5px), error icon, clear message explaining how to fix</li>
+                    <li><strong>Focus states:</strong> Green border (2px), slight shadow, smooth transition</li>
+                </ul>
+            </section>
+
+            <!-- Tables -->
+            <section id="tables">
+                <h2>Tables</h2>
+                <p>Tables display structured data for comparison and analysis. Prioritize readability through clear hierarchy and generous spacing.</p>
+                
+                <h3>Data Table Example</h3>
+                
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Material</th>
+                                <th>Seller</th>
+                                <th>Quantity</th>
+                                <th>Price/kg</th>
+                                <th>Location</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="font-weight: 600;">PET Bottles (Clear)</td>
+                                <td>
+                                    <div>Greentech Recyclers</div>
+                                    <div class="badge badge-verified" style="margin-top: 6px;">✓ Verified</div>
+                                </td>
+                                <td><span style="font-family: var(--font-mono);">5,000 kg</span></td>
+                                <td><span style="font-family: var(--font-mono); font-weight: 600;">₹48.00</span></td>
+                                <td>Mumbai, MH</td>
+                                <td><span style="color: var(--success); font-weight: 600;">● Available</span></td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 600;">HDPE Mixed</td>
+                                <td>
+                                    <div>EcoWaste Solutions</div>
+                                    <div class="badge badge-certified" style="margin-top: 6px;">100% Circular</div>
+                                </td>
+                                <td><span style="font-family: var(--font-mono);">2,500 kg</span></td>
+                                <td><span style="font-family: var(--font-mono); font-weight: 600;">₹42.00</span></td>
+                                <td>Pune, MH</td>
+                                <td><span style="color: var(--warning); font-weight: 600;">● Low Stock</span></td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 600;">Aluminum Scrap</td>
+                                <td>
+                                    <div>MetalRecycle India</div>
+                                    <div class="badge badge-premium" style="margin-top: 6px;">Premium</div>
+                                </td>
+                                <td><span style="font-family: var(--font-mono);">1,200 kg</span></td>
+                                <td><span style="font-family: var(--font-mono); font-weight: 600;">₹135.00</span></td>
+                                <td>Bengaluru, KA</td>
+                                <td><span style="color: var(--success); font-weight: 600;">● Available</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h3>Table Guidelines</h3>
+                <ul>
+                    <li><strong>Sorting:</strong> All columns sortable unless contextually inappropriate (actions)</li>
+                    <li><strong>Alignment:</strong> Left for text, right for numbers, center for icons/actions</li>
+                    <li><strong>Zebra striping:</strong> Avoid. Use subtle hover states instead.</li>
+                    <li><strong>Row height:</strong> Comfortable padding (16px vertical minimum)</li>
+                    <li><strong>Monospace numbers:</strong> Essential for price/quantity columns — aids comparison</li>
+                    <li><strong>Sticky headers:</strong> On long tables, header stays visible during scroll</li>
+                </ul>
+            </section>
+
+            <!-- Voice & Tone -->
+            <section id="voice">
+                <h2>Voice & Tone</h2>
+                <p>Our voice is professional yet approachable, data-focused but human, and always rooted in circular economy expertise.</p>
+                
+                <h3>Voice Characteristics</h3>
+                
+                <div class="principle-grid">
+                    <div class="principle-card">
+                        <div class="principle-title">Clear & Direct</div>
+                        <div class="principle-desc">No jargon without definition. "Verified quality standards" not "holistic sustainability alignment."</div>
+                    </div>
+                    
+                    <div class="principle-card">
+                        <div class="principle-title">Expert but Accessible</div>
+                        <div class="principle-desc">We know circular economy deeply. We explain it clearly. Depth without pretension.</div>
+                    </div>
+                    
+                    <div class="principle-card">
+                        <div class="principle-title">Action-Oriented</div>
+                        <div class="principle-desc">"List your materials" not "Begin your sustainability journey." Verbs over vague aspirations.</div>
+                    </div>
+                    
+                    <div class="principle-card">
+                        <div class="principle-title">Honest & Grounded</div>
+                        <div class="principle-desc">We show data, not claims. Impact metrics over marketing language. Trust through transparency.</div>
+                    </div>
+                </div>
+                
+                <h3>We Are</h3>
+                <ul>
+                    <li><strong>Confident but not arrogant</strong> — We're India's leading platform. Our data quality shows it; we don't need to say it.</li>
+                    <li><strong>Precise with terminology</strong> — "Post-consumer PET" not "recycled plastic." Specificity builds trust.</li>
+                    <li><strong>Helpful without being condescending</strong> — Explain when needed, assume expertise when appropriate.</li>
+                    <li><strong>Focused on outcomes</strong> — What users accomplish matters more than our platform features.</li>
+                </ul>
+                
+                <h3>We Are Not</h3>
+                <ul>
+                    <li>❌ Greenwashing or making vague sustainability claims</li>
+                    <li>❌ Overly casual or consumer-tech playful</li>
+                    <li>❌ Corporate jargon or unnecessarily complex</li>
+                    <li>❌ Feature-focused without business value</li>
+                    <li>❌ Making promises we can't verify with data</li>
+                </ul>
+            </section>
+
+            <!-- Writing Guidelines -->
+            <section id="writing">
+                <h2>Writing Guidelines</h2>
+                
+                <h3>Buttons & Calls to Action</h3>
+                <div class="example-grid">
+                    <div class="example-card do">
+                        <div class="example-header">✓ Do</div>
+                        <div class="example-body">
+                            <button class="btn btn-primary" style="margin-bottom: 8px;">List Material</button>
+                            <button class="btn btn-primary" style="margin-bottom: 8px;">Place Bid</button>
+                            <button class="btn btn-primary">Complete Purchase</button>
+                            <p style="margin-top: 16px; font-size: 14px;">Verb-first, specific action</p>
+                        </div>
+                    </div>
+                    
+                    <div class="example-card dont">
+                        <div class="example-header">✗ Don't</div>
+                        <div class="example-body">
+                            <button class="btn btn-primary" style="margin-bottom: 8px;">Get Started</button>
+                            <button class="btn btn-primary" style="margin-bottom: 8px;">Click Here</button>
+                            <button class="btn btn-primary">Submit</button>
+                            <p style="margin-top: 16px; font-size: 14px;">Vague, generic, no context</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Error Messages</h3>
+                <p>Errors are teaching moments. Explain what happened and how to fix it.</p>
+                
+                <div style="background: #FFF4E5; border-left: 4px solid #FF9500; padding: 16px 20px; border-radius: 10px; margin: 24px 0;">
+                    <div style="font-weight: 600; color: #CC7700; margin-bottom: 8px;">Missing Quality Certificate</div>
+                    <div style="font-size: 15px; color: var(--gray-700); line-height: 1.6;">Materials over 1,000 kg require a quality certificate. Upload your ISO certification or third-party lab report to continue.</div>
+                    <button class="btn btn-secondary" style="margin-top: 12px; font-size: 14px; padding: 8px 16px;">Upload Certificate</button>
+                </div>
+                
+                <h3>Listing Descriptions</h3>
+                
+                <div class="example-grid">
+                    <div class="example-card do">
+                        <div class="example-header">✓ Do</div>
+                        <div class="example-body">
+                            <p style="font-weight: 600; margin-bottom: 12px;">Post-Consumer PET Bottles (Clear)</p>
+                            <p style="font-size: 14px; line-height: 1.6;">5,000 kg of baled, clear PET bottles sourced from verified collection centers across Maharashtra. Material meets FSSAI food-grade recycling standards. Includes ISO 9001:2015 processing certification and chain-of-custody documentation.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="example-card dont">
+                        <div class="example-header">✗ Don't</div>
+                        <div class="example-body">
+                            <p style="font-weight: 600; margin-bottom: 12px;">Premium Quality Plastic Bottles</p>
+                            <p style="font-size: 14px; line-height: 1.6;">We have amazing quality recycled plastic bottles available. These are the best materials for your sustainable business needs. Contact us for this eco-friendly solution!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Terminology -->
+            <section id="terminology">
+                <h2>Terminology</h2>
+                <p>Consistent terminology builds trust and clarity. Use these standard terms throughout the platform.</p>
+                
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Use This</th>
+                                <th>Not This</th>
+                                <th>Context</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Post-consumer materials</strong></td>
+                                <td>Recycled stuff, waste</td>
+                                <td>Materials that have completed their lifecycle</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Material listing</strong></td>
+                                <td>Product, item, offer</td>
+                                <td>When referring to what sellers list</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Verified seller</strong></td>
+                                <td>Trusted partner, certified seller</td>
+                                <td>Sellers who completed KYC and verification</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Transaction</strong></td>
+                                <td>Deal, purchase, order</td>
+                                <td>Completed material exchange</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Quality certification</strong></td>
+                                <td>Green certificate, eco-badge</td>
+                                <td>Third-party quality verification</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Material specifications</strong></td>
+                                <td>Product details, item info</td>
+                                <td>Technical details about materials</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <div class="footer">
+                <p class="footer-text">recykal.market Design Guidelines v1.0 • Last updated May 2026</p>
+                <p class="footer-text" style="margin-top: 8px;">Designed for India's leading B2B circular economy marketplace</p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Smooth scrolling navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    const headerOffset = 70;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update active state
+                    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Intersection observer for active nav states
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '-80px 0px -60% 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    const correspondingLink = document.querySelector(`.nav-link[href="#${id}"]`);
+                    
+                    if (correspondingLink) {
+                        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                        correspondingLink.classList.add('active');
+                    }
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all sections
+        document.querySelectorAll('section[id]').forEach(section => {
+            observer.observe(section);
+        });
+        
+        // Input focus states
+        document.querySelectorAll('input, textarea, select').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.style.borderColor = 'var(--green-primary)';
+                this.style.boxShadow = '0 0 0 3px rgba(0, 135, 90, 0.1)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.style.borderColor = 'var(--gray-300)';
+                this.style.boxShadow = 'none';
+            });
+        });
+
+        // Apple-style accordion
+        // Accordion functionality for main sections
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const section = header.parentElement;
+                section.classList.toggle('open');
+            });
+        });
+        
+        // Accordion functionality for subsections
+        document.querySelectorAll('.accordion-subheader').forEach(subheader => {
+            subheader.addEventListener('click', () => {
+                const subsection = subheader.parentElement;
+                subsection.classList.toggle('open');
+            });
+        });
+        
+        // Set active states and open relevant sections
+        function setActiveNavigation() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const currentHash = window.location.hash.substring(1);
+            
+            // Map pages to their main sections
+            const sectionMap = {
+                'foundations.html': 0,
+                'components.html': 1,
+                'patterns.html': 2,
+                'resources.html': 3
+            };
+            
+            // Open the relevant main section
+            const mainSections = document.querySelectorAll('.accordion-section');
+            const sectionIndex = sectionMap[currentPage];
+            if (sectionIndex !== undefined && mainSections[sectionIndex]) {
+                mainSections[sectionIndex].classList.add('open');
+            }
+            
+            // Find and activate the current link
+            document.querySelectorAll('.accordion-link').forEach(link => {
+                link.classList.remove('active');
+                const href = link.getAttribute('href');
+                
+                if (href) {
+                    const [linkPage, linkHash] = href.split('#');
+                    const linkPageName = linkPage || currentPage;
+                    
+                    // Check if this link matches current page and hash
+                    if (linkPageName.includes(currentPage) || currentPage.includes(linkPageName)) {
+                        if (currentHash && linkHash === currentHash) {
+                            link.classList.add('active');
+                            
+                            // Open parent subsection if exists
+                            const subsection = link.closest('.accordion-subsection');
+                            if (subsection) {
+                                subsection.classList.add('open');
+                            }
+                        } else if (!currentHash && !linkHash) {
+                            // Default: activate first link if no hash
+                            const firstLink = document.querySelector(`.accordion-link[href*="${currentPage}"]`);
+                            if (link === firstLink) {
+                                link.classList.add('active');
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Smooth scrolling for same-page anchors
+        document.querySelectorAll('.accordion-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                if (!href) return;
+                
+                const [page, hash] = href.split('#');
+                const currentPage = window.location.pathname.split('/').pop();
+                
+                // If same page, smooth scroll
+                if (!page || page === currentPage) {
+                    e.preventDefault();
+                    const target = document.getElementById(hash);
+                    if (target) {
+                        const headerOffset = 70;
+                        const elementPosition = target.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                        
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Update active state
+                        document.querySelectorAll('.accordion-link').forEach(l => l.classList.remove('active'));
+                        link.classList.add('active');
+                        
+                        // Update URL
+                        history.pushState(null, '', '#' + hash);
+                    }
+                }
+            });
+        });
+        
+        // Initialize on load
+        setActiveNavigation();
+        
+        // Update on hash change
+        window.addEventListener('hashchange', setActiveNavigation);
+    </script>
+</body>
+</html>
